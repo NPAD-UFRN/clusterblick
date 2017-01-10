@@ -8,8 +8,9 @@ def readRaw(raw_list,path,path_out):
 	import os,re,json
 	for item in range(0,len(raw_list)):
 	#Para cada item em raw_list
+		raw_name = raw_list[item][0:raw_list[item].find('.')]
 		FILEPATH = os.path.join(path, raw_list[item])
-		OUTFILEPATH = os.path.join(path_out, raw_list[item][0:raw_list[item].find('.')]+'.json')
+		OUTFILEPATH = os.path.join(path_out, raw_name+'.js')
 
 		with open(FILEPATH) as f:
 			lines = f.readlines()
@@ -45,8 +46,10 @@ def readRaw(raw_list,path,path_out):
 		json_data = json.dumps(dic_data)
 
 		#write into json
-		with open(OUTFILEPATH,'a+') as outfile:
+		with open(OUTFILEPATH,'w+') as outfile:
+			outfile.write('var '+raw_name+' = ')
 			outfile.write(json_data)
+			outfile.write(';')
 
 readRaw(raw_list,path,path_out)			
 	
