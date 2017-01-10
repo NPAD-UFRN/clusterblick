@@ -1,6 +1,0 @@
-05/01/17 11:19:29
-[sinfo -R] Down nodes explanation
-REASON               USER      TIMESTAMP           NODELIST
-maintenance          pedro     2017-01-05T09:44:23 r1i3n13
-Not responding       root      2017-01-02T14:50:19 service[1-4]
-#  #
