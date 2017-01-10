@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo $(date "+%d/%m/%y %T")  > /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_dfh1.txt
+
+echo "[df -h] Memory monitoring" >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_dfh1.txt
+df -h >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_dfh1.txt
+echo $'#  #' >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_dfh1.txt
+
+scp -P 4422 /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_dfh1.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw

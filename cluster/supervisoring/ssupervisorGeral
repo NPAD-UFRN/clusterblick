@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo Consulta realizada em $(date "+%d/%m/%y")$'\n' > smonitoring.txt
+
+echo "<VIEW>"$'\n' >> smonitoring.txt
+
+echo "[sinfo] Informações Gerais" >> smonitoring.txt
+sinfo >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "[sinfo -R] Informações sobre os nós DOWN" >> smonitoring.txt
+sinfo -R >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "[squeue] Fila de execução" >> smonitoring.txt
+squeue >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "[df -h] Gerenciamento de memória service0 e lustre" >> smonitoring.txt
+df -h >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "</VIEW>"$'\n' >> smonitoring.txt
+
+
+echo "<EMAIL>"$'\n' >> smonitoring.txt
+
+echo "[sinfo --state=down -o %D] Número de nós DOWN" >> smonitoring.txt
+sinfo --state=down -o %D >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "[ping -c 4 10.7.32.67] Ping service0" >> smonitoring.txt
+ping -c 4 10.7.32.67 >> smonitoring.txt
+echo $'#  #\n' >> smonitoring.txt
+
+echo "</EMAIL>" >> smonitoring.txt
+
+
+scp -P 4422 smonitoring.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp

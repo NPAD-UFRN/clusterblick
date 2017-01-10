@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo $(date "+%d/%m/%y %T")  > /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+
+echo "[sinfo] General Information about nodes and partitions for a system running Slurm" >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+sinfo >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+echo $'#  #' >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+
+scp -P 4422 raw/ssupervisor_sinfo1.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw

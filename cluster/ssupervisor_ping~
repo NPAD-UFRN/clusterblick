@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo $(date "+%d/%m/%y %T")  > ./raw/ssupervisor_ping.txt
+echo EMAIL >> ./raw/ssupervisor_ping.txt
+
+echo "[ping -c 4 10.7.32.67] Ping service0" >> ./raw/ssupervisor_ping.txt
+ping -c 4 10.7.32.67 >> ./raw/ssupervisor_ping.txt
+echo $'#  #\n' >> ./raw/ssupervisor_ping.txt
+
+scp -P 4422 ./raw/ssupervisor_ping.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw
