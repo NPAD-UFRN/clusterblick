@@ -1,34 +1,46 @@
-path = './raw/'
-path_out = './data/'
+#Author: Adelson Araujo Junior (NPAD/UFRN)
 
-raw_list = ['ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
-raw_list_email = ['ssupervisor_ping.txt','ssupervisor_sinfo3.txt']
+'''
+This script defines readRaw() function with these parameters:
+	- raw_list: list of file names that contains raw data to be prepared into JSON
+	- path: path of these files
+	- path_out: path of JSONs output
+'''
 
-def readRaw(raw_list,path,path_out):
+def readRaw(raw_list,raw_list_email,path,path_out):
 	import os,re,json
+	
+	#external 'for' to travel raw_list
 	for item in range(0,len(raw_list)):
-	#Para cada item em raw_list
-		raw_name = raw_list[item][0:raw_list[item].find('.')]
-		FILEPATH = os.path.join(path, raw_list[item])
-		OUTFILEPATH = os.path.join(path_out, raw_name+'.js')
-
-		with open(FILEPATH) as f:
-			lines = f.readlines()
+		raw_name = raw_list[item][0:raw_list[item].find('.')] 	#name of the raw_list's item (input)
+		FILEPATH = os.path.join(path, raw_list[item])			#input file path
+		OUTFILEPATH = os.path.join(path_out, raw_name+'.js')	#output file path
+		
+		#internal variables
 		q_date, q_title, keys= [], [], []
 		dic = {}
 		dic_data = []
+		counter, flag_email, flag_down=0, 0, 0
 
-		counter=0
+		#reading the file itself
+		with open(FILEPATH) as f:
+			lines = f.readlines()
 		for line in lines:
-			if line[2]=='/' and line[5]=='/':
+
+			#collecting the query's date
+			if counter==0:
 				q_date.append(line)
 				counter += 1
-
+			#checking if it is an EMAIL information (files in raw_list_email have a line EMAIL meaning that its information will be sent via email if some trouble happens)
+			elif line[0:5]=='EMAIL':
+				flag_email=1
+				counter +=1
+			#getting query's title
 			elif line[0]=='[':
 				q_title.append(line)
 				counter +=1
-
-			elif counter>=2:
+			#working on non-email input files
+			elif counter>=2 and flag_email==0:
 				if line[0]=='#':
 					break
 				elif counter==2:
@@ -43,15 +55,36 @@ def readRaw(raw_list,path,path_out):
 					dic_data.append(dic)
 					dic={}
 					counter+=1
-		json_data = json.dumps(dic_data)
-
-		#write into json
+			#working on email input files
+			elif counter>=2 and flag_email==1:
+				if line[0]=='#':
+					break
+				elif '0% packet loss' in line:
+					email_data=1
+				elif line=='NODES\n':
+					flag_down=1
+				elif flag_down and line!='NODES\n':
+					email_data=line[0]
+				counter+=1
+		
+		#write into path_out/JSONs
+		if (raw_name+'.txt') in raw_list_email:
+			json_data = json.dumps(email_data)
+		else:
+			json_data = json.dumps(dic_data)
 		with open(OUTFILEPATH,'w+') as outfile:
 			outfile.write('var '+raw_name+' = ')
 			outfile.write(json_data)
 			outfile.write(';')
 
-readRaw(raw_list,path,path_out)			
-	
+#Usage example:			
+'''			
+path = './raw/'
+path_out = './data/'
+raw_list = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
+raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
+			
+readRaw(raw_list,raw_list_email,path,path_out)			
+'''	
 
 		
