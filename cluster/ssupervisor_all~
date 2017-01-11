@@ -1,7 +1,0 @@
-./supervisoring/ssupervisor_sinfo1 &> /dev/null
-./supervisoring/ssupervisor_sinfo2 &> /dev/null
-./supervisoring/ssupervisor_sinfo3 &> /dev/null
-./supervisoring/ssupervisor_squeue1 &> /dev/null
-./supervisoring/ssupervisor_dfh1 &> /dev/null
-./supervisoring/ssupervisor_ping &> /dev/null
-
