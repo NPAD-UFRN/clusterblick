@@ -1,9 +1,12 @@
 #!/bin/bash
+file=$1
+destination=$2
+port=$3
 
-echo $(date "+%d/%m/%y %T") > /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_squeue1.txt
+echo $(date "+%d/%m/%y %T") > $file
 
-echo "[squeue] Information about jobs located in the Slurm scheduling queue" >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_squeue1.txt
-squeue >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_squeue1.txt
-echo $'#  #' >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_squeue1.txt
+echo "[squeue] Information about jobs located in the Slurm scheduling queue" >> $file
+squeue >> $file
+echo $'#  #' >> $file
 
-scp -P 4422 /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_squeue1.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw
+scp -P $port $file $destination

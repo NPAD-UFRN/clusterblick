@@ -1,7 +1,11 @@
-./supervisoring/ssupervisor_sinfo1 &> /dev/null
-./supervisoring/ssupervisor_sinfo2 &> /dev/null
-./supervisoring/ssupervisor_sinfo3 &> /dev/null
-./supervisoring/ssupervisor_squeue1 &> /dev/null
-./supervisoring/ssupervisor_dfh1 &> /dev/null
-./supervisoring/ssupervisor_ping &> /dev/null
+path=$1
+destination=$2
+ip_service=$3
+port=$4
 
+./supervisoring/ssupervisor_sinfo1 "$path/ssupervisor_sinfo1.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_sinfo2 "$path/ssupervisor_sinfo2.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_sinfo3 "$path/ssupervisor_sinfo3.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_squeue1 "$path/ssupervisor_squeue1.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_dfh1 "$path/ssupervisor_dfh1.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_ping $ip_service "$path/ssupervisor_ping.txt" $destination $port &> /dev/null

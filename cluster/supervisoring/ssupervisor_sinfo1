@@ -1,9 +1,12 @@
 #!/bin/bash
+file=$1
+destination=$2
+port=$3
 
-echo $(date "+%d/%m/%y %T")  > /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+echo $(date "+%d/%m/%y %T")  > $file
 
-echo "[sinfo] General Information about nodes and partitions for a system running Slurm" >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
-sinfo >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
-echo $'#  #' >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt
+echo "[sinfo] General Information about nodes and partitions for a system running Slurm" >> $file
+sinfo >> $file
+echo $'#  #' >> $file
 
-scp -P 4422 /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_sinfo1.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw
+scp -P $port $file $destination

@@ -1,10 +1,15 @@
 #!/bin/bash
+service0_IP=$1
+file=$2
+destination=$3
+port=$4
 
-echo $(date "+%d/%m/%y %T")  > /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt
-echo EMAIL >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt
+echo $(date "+%d/%m/%y %T")  > $file
+echo EMAIL >> $file
 
-echo "[ping -c 4 10.7.32.67] Ping service0" >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt
-ping -c 4 10.7.32.67 >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt
-echo $'#  #\n' >> /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt
+echo "[ping -c 4 $service0_IP] Ping service" >> $file
+ping -c 4 $service0_IP >> $file
+echo $'#  #\n' >> $file
 
-scp -P 4422 /home/adelsonNPAD/learning/project/supervisoring/raw/ssupervisor_ping.txt adelsonNPAD@10.7.8.74:/var/www/html/protected/tmp/supervisor/raw
+scp -P $port $file $destination
+
