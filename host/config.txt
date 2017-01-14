@@ -1,0 +1,6 @@
+#Email configuration:
+user@user.com
+password
+
+#Email clients:
+adelsondias@live.com,adelson.dias@gmail.com
