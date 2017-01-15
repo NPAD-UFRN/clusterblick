@@ -7,21 +7,14 @@ This script defines readRaw() function with these parameters:
 	- path_out: path of JSONs output
 '''
 
-#Issues:
-#	Test and repair email for down nodes
-#	Interaction with main.py
-
-
 def readRaw(raw_list,raw_list_email,path,path_out):
 	import os,re,json
-	from sendEmail import sendEmail
 	
 	#external 'for' to travel raw_list
 	for item in range(0,len(raw_list)):
 		raw_name = raw_list[item][0:raw_list[item].find('.')] 	#name of the raw_list's item (input)
 		FILEPATH = os.path.join(path, raw_list[item])			#input file path
 		OUTFILEPATH = os.path.join(path_out, raw_name+'.js')	#output file path
-		CONFIGPATH = 'config.txt'
 		
 		#internal variables
 		q_date, q_title, keys= [], [], []
@@ -71,18 +64,7 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 				elif line=='NODES\n':
 					flag_down=1
 				elif flag_down and line!='NODES\n':
-					#email_data=line[0]
-					global global_nodes_down
-					if line[0]>=1 and line[0]!=global_nodes_down:
-						global_nodes_down = line[0]
-						with open(CONFIGPATH) as config:
-							_lines = config.readlines()
-						for _line in _lines:
-							if _line[0:15]=='#Email clients:':
-								index = _lines.index(_line)
-								email_clients = _lines[index+1].split(',')
-						for _i in range(0,len(email_clients)):
-							sendEmail(email_clients[_i],'Cluster Supervisor: Down nodes alert','Warning:\nCluster Supervisor informs you that '+line[0]+' node(s) are down in the moment.')					
+					email_data=line[0]
 				counter+=1
 		
 		#write into path_out/JSONs
@@ -96,12 +78,13 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 			outfile.write(';')
 
 #Usage example:			
-'''
+'''			
 path = './raw/'
 path_out = './data/'
 raw_list = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
 raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
 			
 readRaw(raw_list,raw_list_email,path,path_out)			
-'''
+'''	
+
 		
