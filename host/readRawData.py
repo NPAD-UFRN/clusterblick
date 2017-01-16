@@ -10,6 +10,9 @@ This script defines readRaw() function with these parameters:
 def readRaw(raw_list,raw_list_email,path,path_out):
 	import os,re,json
 	
+	email_dic_output={}
+	dic_output={}
+	
 	#external 'for' to travel raw_list
 	for item in range(0,len(raw_list)):
 		raw_name = raw_list[item][0:raw_list[item].find('.')] 	#name of the raw_list's item (input)
@@ -70,12 +73,16 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 		#write into path_out/JSONs
 		if (raw_name+'.txt') in raw_list_email:
 			json_data = json.dumps(email_data)
+			email_dic[raw_name] = email_data
 		else:
 			json_data = json.dumps(dic_data)
+			general_dic[raw_name] = dic_data
 		with open(OUTFILEPATH,'w+') as outfile:
 			outfile.write('var '+raw_name+' = ')
 			outfile.write(json_data)
 			outfile.write(';')
+			
+	return {'general_dictionary'=general_dic,'email_dictionary'=email_dic}
 
 #Usage example:			
 '''			
@@ -84,7 +91,8 @@ path_out = './data/'
 raw_list = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
 raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
 			
-readRaw(raw_list,raw_list_email,path,path_out)			
+dic = readRaw(raw_list,raw_list_email,path,path_out)	
+print vars(dic)
 '''	
 
 		
