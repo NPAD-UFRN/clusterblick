@@ -1,14 +1,29 @@
+import time
+import readRawData as r, sendEmail as e, readConfig as c
 
-path = './raw/'
-path_out = './data/'
-raw_list = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
-raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
-
+flag_ping,flag_down=0,0
 
 while True:
-	data_dictionary = readRaw(raw_list,raw_list_email,path,path_out)	
 	
+	config = c.readConfig('config.txt')
+	data_dictionary = r.readRaw(config['raw_files'],config['raw_files_email'],config['path_raw'],config['path_data'])	
+	
+	#Sending email if something goes wrong
 	downnodes = data_dictionary['email_dictionary'].get('ssupervisor_sinfo3',0)
-	pingresult = data_dictionary['email_dictionary'].get('ssupervisor_ping',None)
-	
-	
+	pingbool = data_dictionary['email_dictionary'].get('ssupervisor_ping',None)
+	if pingbool==0 and flag_ping==0:
+		message = '\nWARNING:\n\nPing is not returning any package, please check if the cluster\' service is available and working normally.'
+		print message
+		e.sendEmail(message)
+		flag_ping=1
+	elif pingbool==1 and flag_ping==1:
+		flag_ping=0
+	if downnodes>=4 and flag_down==0:
+		message = '\nWARNING:\n\nThere are {} down nodes. Please check if something unexpected happened.'.format(downnodes)
+		print message
+		e.sendEmail(message)
+		flag_down=1
+	elif downnodes<4 and flag_down==1:
+		flag_down=0
+		
+	time.sleep(5)
