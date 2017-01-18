@@ -1,5 +1,5 @@
-
-def readConfig(file):
+#It reads config.txt and return a dictionary
+def readConfig(file,string):
 	with open(file) as config:
 		lines = config.readlines()
 	for line in lines:
@@ -18,5 +18,16 @@ def readConfig(file):
 		elif line[0:20]=='#Raw files to email:':
 			raw_files_email = lines[lines.index(line)+1].split(',')
 			raw_files_email = [item.strip() for item in raw_files_email]
-		
-	return {'fromaddr':fromaddr,'password':password,'list_clients':toaddr,'path_raw':raw,'path_data':data,'raw_files':raw_files,'raw_files_email':raw_files_email}
+		elif line[0:20]=='#Node names allowed:':
+			nn_allowed = lines[lines.index(line)+1].split(',')
+			nn_allowed = [item.strip() for item in nn_allowed]
+	
+	config_dic={'fromaddr':fromaddr,'password':password,'list_clients':toaddr,'path_raw':raw,'path_data':data,'raw_files':raw_files,'raw_files_email':raw_files_email,'nn_allowed':nn_allowed}
+
+	if string=='all':
+		return config_dic
+	else:
+		try:
+			return config_dic[string]
+		except:
+			print 'ERROR: config.txt does not have this configuration item available'

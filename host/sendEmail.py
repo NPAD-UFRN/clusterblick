@@ -1,8 +1,3 @@
-'''
-Function to send email
-Issue: point the server smtp and port
-'''
-
 def sendEmail(message):
 	import smtplib
 	from email.MIMEMultipart import MIMEMultipart

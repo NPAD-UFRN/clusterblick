@@ -15,4 +15,7 @@ ssupervisor_ping.txt,ssupervisor_sinfo3.txt,ssupervisor_dfh1.txt,ssupervisor_sin
 #Raw files to email: (must be in raw_files as well)
 ssupervisor_ping.txt,ssupervisor_sinfo3.txt
 
+#Node names allowed:
+'rAiBnC', 'serviceX'
+
 
