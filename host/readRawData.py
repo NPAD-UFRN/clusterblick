@@ -73,10 +73,10 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 			json_data = json.dumps(email_data).replace('{','\n{')
 			email_dic[raw_name] = email_data
 		else:
-			json_data = json.dumps(dic_data).
+			json_data = json.dumps(dic_data)
 			general_dic[raw_name] = dic_data
 		with open(OUTFILEPATH,'w+') as outfile:
-			outfile.write('var '+raw_name+' = ').replace('{','\n{')
+			outfile.write('var '+raw_name+' = ')
 			outfile.write(json_data)
 			outfile.write(';')
 			

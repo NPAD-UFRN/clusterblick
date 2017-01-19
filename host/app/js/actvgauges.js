@@ -41,9 +41,3 @@ function updateGauges()
 		gauges[key].redraw(value);
 	}
 }
-
-function initialize()
-{
-	createGauges();
-	setInterval(updateGauges, 5000);
-}
