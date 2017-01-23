@@ -1,6 +1,21 @@
 #Email configuration:
-user@user.com
-password
+config@email.com
+passw
 
 #Email clients:
-adelsondias@live.com,adelson.dias@gmail.com
+cli1@email.com, cli2@email.com
+
+#Path configuration:
+raw: './raw/'
+data:'./data/'
+
+#Raw files:
+ssupervisor_ping.txt,ssupervisor_sinfo3.txt,ssupervisor_dfh1.txt,ssupervisor_sinfo1.txt,ssupervisor_sinfo2.txt,ssupervisor_squeue1.txt
+
+#Raw files to email: (must be in raw_files as well)
+ssupervisor_ping.txt,ssupervisor_sinfo3.txt
+
+#Node names allowed:
+'rAiBnC', 'serviceX'
+
+

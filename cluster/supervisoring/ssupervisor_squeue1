@@ -5,7 +5,7 @@ port=$3
 
 echo $(date "+%d/%m/%y %T") > $file
 
-echo "[squeue] Information about jobs located in the Slurm scheduling queue" >> $file
+echo "[squeue] Information about jobs located in the Slurm's scheduling queue" >> $file
 squeue >> $file
 echo $'#  #' >> $file
 

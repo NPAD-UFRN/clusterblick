@@ -1,0 +1,18 @@
+html, body, .container-fluid{
+	margin: 0;
+	height: 100%;
+	font: 10px arial;
+}
+.graphs{
+	height: 60%;
+}
+.row .gauges{
+	padding-left:100px;
+}
+span{
+	margin-right:100px;
+}
+.donutt{
+	padding-left:100px;
+	
+}

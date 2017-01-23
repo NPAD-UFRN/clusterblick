@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  	<head>
+    	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+    	<title>Cluster Monitoring</title>
+		
+		
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">		
+
+		<script type="text/javascript" src="js/d3.v2.js"></script>
+		<script type="text/javascript" src="js/Chart.bundle.js"></script>
+		<script type="text/javascript" src="js/gaugelib.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="../data/ssupervisor_dfh1.js"></script>
+		<script type="text/javascript" src="js/actvgauges.js"></script>
+		
+		
+		<script>
+			function initialize()
+			{
+				createGauges();
+				setInterval(updateGauges, 5000);
+			}
+		</script>
+		
+	</head>
+	
+	
+	<body onload="initialize()">
+		<div class="container-fluid master">
+			
+			
+			
+			<div class="row graphs">
+			</div>
+			
+			
+			
+			<div class="row">
+				<div class="col-sm-6 gauges" >
+					<span id="service0"></span>
+					<span id="lustre"></span>
+				</div>
+				<div class="col-sm-3" >
+					<div class="donutt"><canvas id="donut"></canvas></div>
+					<script type="text/javascript" src="js/doghnut.js"></script>
+				</div>
+			</div>
+		</div>
+		
+		
+			
+	</body>
+	
+</html>
