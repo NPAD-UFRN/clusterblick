@@ -1,9 +1,11 @@
 import time
-import readRawData as r, sendEmail as e, readConfig as c
+import readRawData as r, sendEmail as e, readConfig as c, getRawNodes as g
 
 flag_ping,flag_down=0,0
 
 while True:
+	
+	g.getRawNodesJSON()
 	
 	config = c.readConfig('config.txt','all')
 	data_dictionary = r.readRaw(config['raw_files'],config['raw_files_email'],config['path_raw'],config['path_data'])	

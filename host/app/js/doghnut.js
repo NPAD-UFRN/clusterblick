@@ -12,7 +12,7 @@ var data = {
     ],
     datasets: [
         {
-            data: [300, 100, 50],//alloc,idle,down
+            data: [stats.allocs,stats.idles,stats.downs],//alloc,idle,down,//alloc,idle,down
             backgroundColor: [
                 "#1F8261",//alloc
                 "#FFA500",//idle

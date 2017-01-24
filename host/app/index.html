@@ -9,12 +9,14 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css">		
 
 		<script type="text/javascript" src="js/d3.v2.js"></script>
+		<script src="http://d3js.org/d3.v3.js"></script>
 		<script type="text/javascript" src="js/Chart.bundle.js"></script>
 		<script type="text/javascript" src="js/gaugelib.js"></script>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		
-		<script type="text/javascript" src="../data/ssupervisor_dfh1.js"></script>
+		<script type="text/javascript" src="js/ssupervisor_dfh1.js"></script>
+		<script type="text/javascript" src="js/nodes_stats.js"></script>
 		<script type="text/javascript" src="js/actvgauges.js"></script>
 		
 		
@@ -24,7 +26,26 @@
 				createGauges();
 				setInterval(updateGauges, 5000);
 			}
+						
 		</script>
+		
+		
+		<script>
+			
+			function reload_js(src) {
+				$('script[src="' + src + '"]').remove();
+				$('<script>').attr('src', src).appendTo('head');
+			}
+			
+			setInterval(function(){
+				reload_js("js/nodes_stats.js");
+				reload_js("js/ssupervisor_dfh1.js");
+				myDoughnutChart.chart.config.data.datasets[0].data=[stats.allocs,stats.idles,stats.downs];
+				myDoughnutChart.update();
+			}, 1000);
+			 
+		</script>
+		
 		
 	</head>
 	
@@ -36,7 +57,6 @@
 			
 			<div class="row graphs">
 			</div>
-			
 			
 			
 			<div class="row">

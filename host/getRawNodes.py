@@ -7,8 +7,8 @@ def getRawNodesJSON():
 	PATH = c.readConfig('config.txt','path_data')
 	NODE_NAMES_ALLOWED = c.readConfig('config.txt','nn_allowed')
 	FILEPATH = os.path.join(PATH[1:-1], 'ssupervisor_sinfo1.js')
-	OUTFILEPATH1 = os.path.join(PATH[1:-1], 'nodes_sinfo.js')
-	OUTFILEPATH2 = os.path.join(PATH[1:-1], 'nodes_stats.js')
+	OUTFILEPATH1 = 'app/js/nodes_sinfo.js'
+	OUTFILEPATH2 = 'app/js/nodes_stats.js'
 
 	with open(FILEPATH) as f:
 		lines = f.readlines()
@@ -51,7 +51,7 @@ def getRawNodesJSON():
 		#ex: "r1i0n[1-3],r1i0n[5-6]" to "r1i0n[1-3]","r1i0n[5-6]" 
 		splitted = item.split(',r')
 		for i in range(0,len(splitted)):
-			if ','+NODE_NAMES_ALLOWED[1][0:-1] in splitted[i]:
+			if ','+NODE_NAMES_ALLOWED[1][0:-1] in splitted[i]: #if service in splitted[i]
 				oversplit = splitted[i].split(','+NODE_NAMES_ALLOWED[1][0])
 				for j in range(0,len(oversplit)):
 					if oversplit[j][0:6]==NODE_NAMES_ALLOWED[1][1:-1]:
@@ -79,20 +79,48 @@ def getRawNodesJSON():
 			else:
 				full_names.append(iitem)
 			for iiitem in full_names:
+				if NODE_NAMES_ALLOWED[1][1:-2] in iiitem: #if service in iiitem
+					r = NODE_NAMES_ALLOWED[1][1:-2]
+					i = NODE_NAMES_ALLOWED[1][1:-2]
+					n = iiitem[iiitem.find(NODE_NAMES_ALLOWED[1][-5:-2])+3:]
+				else:
+					r = iiitem[iiitem.find('r')+1:iiitem.find('i')]
+					i = iiitem[iiitem.find('i')+1:iiitem.find('n')]
+					n = iiitem[iiitem.find('n')+1:]
+						
 				dic={}
 				dic['name']=iiitem
+				dic['r']=r
+				dic['i']=i
+				dic['n']=n
 				dic['state']=stat
 				list_dic.append(dic)
 		
-	allocs,idles,downs=0,0,0	
+	allocs,idles,downs=0,0,0
+	tsv_concat = 'nnn\tiii\tvalue\n'
 	for d in list_dic:
 		if d['state']=='alloc':
 			allocs+=1
+			value=2
 		elif d['state']=='idle':
 			idles+=1
+			value=1
 		else:
-			downs+=1	
+			downs+=1
+			value=0
+		if d['i']==NODE_NAMES_ALLOWED[1][1:-2]:
+			tsv_concat+=str(int(d['n'])+1)+'\t'+str(5)+'\t'+str(value)+'\n'
+			tsv_concat+=''
+		else:
+			tsv_concat+=str(int(d['n'])+1)+'\t'+str(int(d['i'])+1)+'\t'+str(value)+'\n'
+	
+	with open('app/js/nodes.tsv','w+') as outfile:
+		outfile.write(tsv_concat)
+			
+			
 	stats_dic={'allocs':allocs,'idles':idles,'downs':downs}
+	
+	
 				
 	json_data = json.dumps(list_dic).replace('{','\n{')
 	json_stats = json.dumps(stats_dic)
@@ -104,4 +132,6 @@ def getRawNodesJSON():
 		outfile.write('var stats = ')
 		outfile.write(json_stats)
 		outfile.write(';')
+		
+getRawNodesJSON()
 		
