@@ -7,8 +7,6 @@ def getRawNodesJSON():
 	PATH = c.readConfig('config.txt','path_data')
 	NODE_NAMES_ALLOWED = c.readConfig('config.txt','nn_allowed')
 	FILEPATH = os.path.join(PATH[1:-1], 'ssupervisor_sinfo1.js')
-	OUTFILEPATH1 = 'app/js/nodes_sinfo.js'
-	OUTFILEPATH2 = 'app/js/nodes_stats.js'
 
 	with open(FILEPATH) as f:
 		lines = f.readlines()
@@ -113,24 +111,73 @@ def getRawNodesJSON():
 			tsv_concat+=''
 		else:
 			tsv_concat+=str(int(d['n'])+1)+'\t'+str(int(d['i'])+1)+'\t'+str(value)+'\n'
-	
-	with open('app/js/nodes.tsv','w+') as outfile:
-		outfile.write(tsv_concat)
-
 
 	stats_dic={'allocs':allocs,'idles':idles,'downs':downs}
 
 
 
-	json_data = json.dumps(list_dic).replace('{','\n{')
-	json_stats = json.dumps(stats_dic)
-	with open(OUTFILEPATH1,'w+') as outfile:
-		outfile.write('var nodes = ')
-		outfile.write(json_data)
-		outfile.write(';')
-	with open(OUTFILEPATH2,'w+') as outfile:
-		outfile.write('var stats = ')
-		outfile.write(json_stats)
-		outfile.write(';')
+	return [list_dic,stats_dic,tsv_concat]
 
-getRawNodesJSON()
+
+
+
+
+#Issue: get the sinfohist in another thread
+
+if __name__=="__main__":
+	import json
+	import time, datetime
+	from collections import deque
+
+	alloc_hist,idle_hist,down_hist = deque(),deque(),deque()
+	frequency=0
+
+	while True:
+		now = datetime.datetime.now()
+
+		list_dic, stats_dic, tsv_concat = getRawNodesJSON()
+
+		OUTFILEPATHsinfo = 'app/js/nodes_sinfo.js'
+		OUTFILEPATHstats = 'app/js/nodes_stats.js'
+		OUTFILEPATHtsv = 'app/nodes.tsv'
+		OUTFILEPATHsinfohist = 'app/js/sinfohist.js'
+
+
+		if frequency>=60:
+			frequency=0
+			alloc_hist.append(stats_dic['allocs'])
+			idle_hist.append(stats_dic['idles'])
+			down_hist.append(stats_dic['downs'])
+			if len(alloc_hist)>576:
+				alloc_hist.popleft()
+				idle_hist.popleft()
+				down_hist.popleft()
+		print alloc_hist
+
+		json_data = json.dumps(list_dic).replace('{','\n{')
+		json_stats = json.dumps(stats_dic)
+
+
+		with open(OUTFILEPATHsinfo,'w+') as outfile:
+			outfile.write('var nodes = ')
+			outfile.write(json_data)
+			outfile.write(';')
+		with open(OUTFILEPATHstats,'w+') as outfile:
+			outfile.write('var stats = ')
+			outfile.write(json_stats)
+			outfile.write(';')
+		with open(OUTFILEPATHtsv,'w+') as outfile:
+			outfile.write(tsv_concat)
+		with open(OUTFILEPATHsinfohist,'w+') as outfile:
+			outfile.write('var alloc_hist = ')
+			outfile.write(str(list(alloc_hist)))
+			outfile.write(';')
+			outfile.write('var idle_hist = ')
+			outfile.write(str(list(idle_hist)))
+			outfile.write(';')
+			outfile.write('var down_hist = ')
+			outfile.write(str(list(down_hist)))
+			outfile.write(';')
+
+		frequency+=1
+		time.sleep(5)
