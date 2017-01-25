@@ -17,5 +17,3 @@ ssupervisor_ping.txt,ssupervisor_sinfo3.txt
 
 #Node names allowed:
 'rAiBnC', 'serviceX'
-
-

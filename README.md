@@ -8,3 +8,5 @@ Contain shell scripts to run in cluster login's node. It basically run sinfo, sq
 
 ###host
 The host is the computer that maintain the supervisor application. It receives cluster report files and manipulate it into JSON objects to use in web application.
+
+![alt tag](https://github.com/adelsondias/cluster-supervisor/tree/master/host/app/print.png)

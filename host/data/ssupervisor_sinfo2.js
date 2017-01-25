@@ -1,0 +1,1 @@
+var ssupervisor_sinfo2 = [{"TIMESTAMP": "2017-01-05T09:44:23", "REASON": "maintenance", "NODELIST": "r1i3n13", "USER": "pedro"}, {"TIMESTAMP": "2017-01-02T14:50:19", "REASON": "Not_responding", "NODELIST": "service[1-4]", "USER": "root"}];

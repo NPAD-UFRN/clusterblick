@@ -3,76 +3,98 @@
   	<head>
     	<meta http-equiv="content-type" content="text/html;charset=utf-8">
     	<title>Cluster Monitoring</title>
-		
-		
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">		
 
-		<script type="text/javascript" src="js/d3.v2.js"></script>
-		<script src="http://d3js.org/d3.v3.js"></script>
+
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+
+		<script type="text/javascript" src="d3v3.js"></script>
 		<script type="text/javascript" src="js/Chart.bundle.js"></script>
 		<script type="text/javascript" src="js/gaugelib.js"></script>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
 		<script type="text/javascript" src="js/ssupervisor_dfh1.js"></script>
 		<script type="text/javascript" src="js/nodes_stats.js"></script>
 		<script type="text/javascript" src="js/actvgauges.js"></script>
-		
-		
+    <script type="text/javascript" src="gridnodes.js"></script>
+
 		<script>
 			function initialize()
 			{
 				createGauges();
 				setInterval(updateGauges, 5000);
-			}
-						
-		</script>
-		
-		
-		<script>
-			
-			function reload_js(src) {
+			} //updating gauges
+
+      function reload_js(src) {
 				$('script[src="' + src + '"]').remove();
 				$('<script>').attr('src', src).appendTo('head');
 			}
-			
+
 			setInterval(function(){
 				reload_js("js/nodes_stats.js");
 				reload_js("js/ssupervisor_dfh1.js");
 				myDoughnutChart.chart.config.data.datasets[0].data=[stats.allocs,stats.idles,stats.downs];
-				myDoughnutChart.update();
+				myDoughnutChart.update();    //updating donut chart
+
+        heatmapChart(datasets[0],1); //updating node grid
 			}, 1000);
-			 
+
 		</script>
-		
-		
+
+
+		<script>
+
+
+
+		</script>
+
+<style>
+  .master{
+    background-color:red;
+  }
+  .master2{
+    background-color:green;
+  }
+</style>
+
+
 	</head>
-	
-	
+
+
 	<body onload="initialize()">
-		<div class="container-fluid master">
-			
-			
-			
-			<div class="row graphs">
-			</div>
-			
-			
-			<div class="row">
-				<div class="col-sm-6 gauges" >
-					<span id="service0"></span>
-					<span id="lustre"></span>
-				</div>
-				<div class="col-sm-3" >
-					<div class="donutt"><canvas id="donut"></canvas></div>
-					<script type="text/javascript" src="js/doghnut.js"></script>
-				</div>
-			</div>
-		</div>
-		
-		
-			
+      		<div class="container-fluid" id="left">
+
+      			<div class="row graphs">
+      			</div>
+
+
+      			<div class="row">
+      				<div class="col-sm-6 gauges" >
+      					<span id="service0"></span>
+      					<span id="lustre"></span>
+      				</div>
+      				<div class="col-sm-3" >
+      					<div class="donutt"><canvas id="donut"></canvas></div>
+      					<script type="text/javascript" src="js/doghnut.js"></script>
+      				</div>
+      			</div>
+      		</div>
+
+          <div class="container-fluid" id="right">
+            <div class="row ">
+              <div class="col-sm-2">
+                <div id="nodegrid"></div>
+                <script type="text/javascript" src="gridnodes.js"> </script>
+              </div>
+      			</div>
+      		</div>
+
+
+
+
+
+
 	</body>
-	
+
 </html>

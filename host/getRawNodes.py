@@ -48,7 +48,7 @@ def getRawNodesJSON():
 	list_dic = []
 	for item in nodes:
 		#splitting first step: separate node interval
-		#ex: "r1i0n[1-3],r1i0n[5-6]" to "r1i0n[1-3]","r1i0n[5-6]" 
+		#ex: "r1i0n[1-3],r1i0n[5-6]" to "r1i0n[1-3]","r1i0n[5-6]"
 		splitted = item.split(',r')
 		for i in range(0,len(splitted)):
 			if ','+NODE_NAMES_ALLOWED[1][0:-1] in splitted[i]: #if service in splitted[i]
@@ -59,8 +59,8 @@ def getRawNodesJSON():
 					splitted.append(oversplit[j])
 				splitted.remove(splitted[i])
 
-			if splitted[i][0].isdigit(): 
-				splitted[i] = "r"+splitted[i]	
+			if splitted[i][0].isdigit():
+				splitted[i] = "r"+splitted[i]
 			#splitting second step: separate each node
 			#ex: "r1i0n[1-3]","r1i0n[5-6]" to "r1i0n1","r1i0n2","r1i0n3","r1i0n5","r1i0n6"
 		for iitem in splitted:
@@ -87,7 +87,7 @@ def getRawNodesJSON():
 					r = iiitem[iiitem.find('r')+1:iiitem.find('i')]
 					i = iiitem[iiitem.find('i')+1:iiitem.find('n')]
 					n = iiitem[iiitem.find('n')+1:]
-						
+
 				dic={}
 				dic['name']=iiitem
 				dic['r']=r
@@ -95,7 +95,7 @@ def getRawNodesJSON():
 				dic['n']=n
 				dic['state']=stat
 				list_dic.append(dic)
-		
+
 	allocs,idles,downs=0,0,0
 	tsv_concat = 'nnn\tiii\tvalue\n'
 	for d in list_dic:
@@ -116,12 +116,12 @@ def getRawNodesJSON():
 	
 	with open('app/js/nodes.tsv','w+') as outfile:
 		outfile.write(tsv_concat)
-			
-			
+
+
 	stats_dic={'allocs':allocs,'idles':idles,'downs':downs}
-	
-	
-				
+
+
+
 	json_data = json.dumps(list_dic).replace('{','\n{')
 	json_stats = json.dumps(stats_dic)
 	with open(OUTFILEPATH1,'w+') as outfile:
@@ -132,6 +132,5 @@ def getRawNodesJSON():
 		outfile.write('var stats = ')
 		outfile.write(json_stats)
 		outfile.write(';')
-		
+
 getRawNodesJSON()
-		
