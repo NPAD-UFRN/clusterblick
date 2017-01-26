@@ -16,8 +16,10 @@
 
 		<script type="text/javascript" src="js/ssupervisor_dfh1.js"></script>
 		<script type="text/javascript" src="js/nodes_stats.js"></script>
+    <script type="text/javascript" src="js/sinfohist.js"></script>
 		<script type="text/javascript" src="js/actvgauges.js"></script>
     <script type="text/javascript" src="gridnodes.js"></script>
+
 
 		<script>
 			function initialize()
@@ -34,8 +36,15 @@
 			setInterval(function(){
 				reload_js("js/nodes_stats.js");
 				reload_js("js/ssupervisor_dfh1.js");
+        reload_js("js/sinfohist.js");
 				myDoughnutChart.chart.config.data.datasets[0].data=[stats.allocs,stats.idles,stats.downs];
 				myDoughnutChart.update();    //updating donut chart
+        console.log(sinfoHistChart.chart.config.data.datasets[0].data);
+        sinfoHistChart.chart.config.data.datasets[0].data = down_hist;
+        sinfoHistChart.chart.config.data.datasets[1].data = idle_hist;
+        sinfoHistChart.chart.config.data.datasets[2].data = alloc_hist;
+        sinfoHistChart.chart.config.data.labels = label_hist;
+				sinfoHistChart.update();    //updating donut chart
 
         heatmapChart(datasets[0],1); //updating node grid
 			}, 1000);
@@ -65,7 +74,14 @@
 	<body onload="initialize()">
       		<div class="container-fluid" id="left">
 
+            <div class="row title">
+              <p>ClusterBlick</p>
+            </div>
       			<div class="row graphs">
+              <div class="col-sm-4">
+                <div id="sinfohist"><canvas id="updating-chart" width="600" height="400"></canvas></div>
+                <script type="text/javascript" src="js/sinfohist_line.js"></script>
+              </div>
       			</div>
 
 
@@ -75,7 +91,7 @@
       					<span id="lustre"></span>
       				</div>
       				<div class="col-sm-3" >
-      					<div class="donutt"><canvas id="donut"></canvas></div>
+      					<div id="donutt"><canvas id="donut"></canvas></div>
       					<script type="text/javascript" src="js/doghnut.js"></script>
       				</div>
       			</div>

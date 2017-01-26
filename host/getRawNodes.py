@@ -114,23 +114,18 @@ def getRawNodesJSON():
 
 	stats_dic={'allocs':allocs,'idles':idles,'downs':downs}
 
-
-
 	return [list_dic,stats_dic,tsv_concat]
 
 
-
-
-
-#Issue: get the sinfohist in another thread
 
 if __name__=="__main__":
 	import json
 	import time, datetime
 	from collections import deque
 
-	alloc_hist,idle_hist,down_hist = deque(),deque(),deque()
+	alloc_hist,idle_hist,down_hist,label_hist = deque(),deque(),deque(),deque()
 	frequency=0
+	th_enable=datetime.datetime.now()-datetime.timedelta(seconds=10)
 
 	while True:
 		now = datetime.datetime.now()
@@ -142,42 +137,46 @@ if __name__=="__main__":
 		OUTFILEPATHtsv = 'app/nodes.tsv'
 		OUTFILEPATHsinfohist = 'app/js/sinfohist.js'
 
+		if now-th_enable>datetime.timedelta(seconds=5):
+			th_enable=datetime.datetime.now()
+			frequency+=1
 
-		if frequency>=60:
+			json_data = json.dumps(list_dic).replace('{','\n{')
+			json_stats = json.dumps(stats_dic)
+			with open(OUTFILEPATHsinfo,'w+') as outfile:
+				outfile.write('var nodes = ')
+				outfile.write(json_data)
+				outfile.write(';')
+			with open(OUTFILEPATHstats,'w+') as outfile:
+				outfile.write('var stats = ')
+				outfile.write(json_stats)
+				outfile.write(';')
+			with open(OUTFILEPATHtsv,'w+') as outfile:
+				outfile.write(tsv_concat)
+			with open(OUTFILEPATHsinfohist,'w+') as outfile:
+				outfile.write('var alloc_hist = ')
+				outfile.write(str(list(alloc_hist)))
+				outfile.write(';\n')
+				outfile.write('var idle_hist = ')
+				outfile.write(str(list(idle_hist)))
+				outfile.write(';\n')
+				outfile.write('var down_hist = ')
+				outfile.write(str(list(down_hist)))
+				outfile.write(';\n')
+				outfile.write('var label_hist = ')
+				outfile.write(str(list(label_hist)))
+				outfile.write(';\n')
+
+		if frequency>=1:
 			frequency=0
 			alloc_hist.append(stats_dic['allocs'])
 			idle_hist.append(stats_dic['idles'])
 			down_hist.append(stats_dic['downs'])
+			label_hist.append(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 			if len(alloc_hist)>576:
 				alloc_hist.popleft()
 				idle_hist.popleft()
 				down_hist.popleft()
-		print alloc_hist
+				label_hist.popleft()
 
-		json_data = json.dumps(list_dic).replace('{','\n{')
-		json_stats = json.dumps(stats_dic)
-
-
-		with open(OUTFILEPATHsinfo,'w+') as outfile:
-			outfile.write('var nodes = ')
-			outfile.write(json_data)
-			outfile.write(';')
-		with open(OUTFILEPATHstats,'w+') as outfile:
-			outfile.write('var stats = ')
-			outfile.write(json_stats)
-			outfile.write(';')
-		with open(OUTFILEPATHtsv,'w+') as outfile:
-			outfile.write(tsv_concat)
-		with open(OUTFILEPATHsinfohist,'w+') as outfile:
-			outfile.write('var alloc_hist = ')
-			outfile.write(str(list(alloc_hist)))
-			outfile.write(';')
-			outfile.write('var idle_hist = ')
-			outfile.write(str(list(idle_hist)))
-			outfile.write(';')
-			outfile.write('var down_hist = ')
-			outfile.write(str(list(down_hist)))
-			outfile.write(';')
-
-		frequency+=1
-		time.sleep(5)
+			print alloc_hist

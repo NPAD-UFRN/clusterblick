@@ -25,15 +25,27 @@ html, body, .container-fluid{
 .graphs{
 	height: 60%;
 }
+.title p{
+	font-family: modern;
+	font-size: 64px;
+	font-style: oblique;
+	color: #616161;
+	margin-left: 100px;
+	margin-top: 10px;
+}
+
 .row .gauges{
 	padding-left:100px;
 }
 span{
 	margin-right:100px;
 }
-.donutt{
+#donutt{
 	padding-left:100px;
-
+}
+#sinfohist{
+	padding-left: 700px;
+	margin-top: 50px;
 }
 rect.bordered {
 	stroke: #E6E6E6;
