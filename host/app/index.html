@@ -39,7 +39,6 @@
         reload_js("js/sinfohist.js");
 				myDoughnutChart.chart.config.data.datasets[0].data=[stats.allocs,stats.idles,stats.downs];
 				myDoughnutChart.update();    //updating donut chart
-        console.log(sinfoHistChart.chart.config.data.datasets[0].data);
         sinfoHistChart.chart.config.data.datasets[0].data = down_hist;
         sinfoHistChart.chart.config.data.datasets[1].data = idle_hist;
         sinfoHistChart.chart.config.data.datasets[2].data = alloc_hist;
@@ -91,9 +90,11 @@
       					<span id="lustre"></span>
       				</div>
       				<div class="col-sm-3" >
-      					<div id="donutt"><canvas id="donut"></canvas></div>
+      					<div id="donutt"><canvas id="donut" width="250" height="250"></canvas></div>
       					<script type="text/javascript" src="js/doghnut.js"></script>
       				</div>
+              <div id="legend">
+              </div>
       			</div>
       		</div>
 

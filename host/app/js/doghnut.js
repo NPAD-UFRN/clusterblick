@@ -1,8 +1,59 @@
+Chart.pluginService.register({
+    beforeRender: function (chart) {
+        if (chart.config.options.showAllTooltips) {
+            // create an array of tooltips
+            // we can't use the chart tooltip because there is only one tooltip per chart
+            chart.pluginTooltips = [];
+            chart.config.data.datasets.forEach(function (dataset, i) {
+                chart.getDatasetMeta(i).data.forEach(function (sector, j) {
+                    chart.pluginTooltips.push(new Chart.Tooltip({
+                        _chart: chart.chart,
+                        _chartInstance: chart,
+                        _data: chart.data,
+                        _options: chart.options,
+                        _active: [sector]
+                    }, chart));
+                });
+            });
+
+            // turn off normal tooltips
+            chart.options.tooltips.enabled = false;
+        }
+    },
+    afterDraw: function (chart, easing) {
+        if (chart.config.options.showAllTooltips) {
+            // we don't want the permanent tooltips to animate, so don't do anything till the animation runs atleast once
+            if (!chart.allTooltipsOnce) {
+                if (easing !== 1)
+                    return;
+                chart.allTooltipsOnce = true;
+            }
+
+            // turn on tooltips
+            chart.options.tooltips.enabled = true;
+            Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
+                tooltip.initialize();
+                tooltip.update();
+                // we don't actually need this since we are not animating tooltips
+                tooltip.pivot();
+                tooltip.transition(easing).draw();
+            });
+            chart.options.tooltips.enabled = false;
+        }
+    }
+});
+
+
 var ctx = "donut";
 
-var options = { 
+var options = {
     responsive: false,
-    maintainAspectRatio: true
+    tooltipTemplate: "<%= value %>",
+    onAnimationComplete: function () {
+    this.showTooltip(this.segments, true);
+    },
+    tooltipEvents: [],
+    showAllTooltips: true
 }
 var data = {
     labels: [
@@ -11,6 +62,7 @@ var data = {
         "Down"
     ],
     datasets: [
+
         {
             data: [stats.allocs,stats.idles,stats.downs],//alloc,idle,down,//alloc,idle,down
             backgroundColor: [
@@ -23,15 +75,14 @@ var data = {
                 "#FFA500",//idle
                 "#CB4B16"//down
             ]
-        }]
+        }
+
+    ]
 };
 
 //doughnut chart
 var myDoughnutChart = new Chart(ctx, {
-    type: 'doughnut',
+  type: 'doughnut',
 	data: data,
-	animation:{
-        animateScale:true
-    }    
+  options: options
 });
-

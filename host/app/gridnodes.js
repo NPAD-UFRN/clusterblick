@@ -1,12 +1,12 @@
 var margin = { top: 50, right: 0, bottom: 100, left: 30 },
           width = 960 - margin.left - margin.right,
-          height = 800 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / 24),
+          height = 900 - margin.top - margin.bottom,
+          gridSize = Math.floor(width / 20),
           legendElementWidth = 50,
           buckets = 2,
           colors = ["#CB4B16","#FFA500", "#1F8261"],
           nnns = ["n0", "n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9", "n10", "n11", "n12", "n13", "n14", "n15","n16","n17"],
-          times = ["i1", "i2", "i3", "i4","service"];
+          times = ["i0", "i1", "i2", "i3","service"];
           datasets = ["nodes.tsv"];
 
       var svg = d3.select("#nodegrid").append("svg")

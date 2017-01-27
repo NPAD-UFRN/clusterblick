@@ -37,11 +37,11 @@ html, body, .container-fluid{
 .row .gauges{
 	padding-left:100px;
 }
-span{
+#service0, #lustre{
 	margin-right:100px;
 }
 #donutt{
-	padding-left:100px;
+	margin-right:100px;
 }
 #sinfohist{
 	padding-left: 700px;
@@ -53,15 +53,7 @@ rect.bordered {
 }
 
 text.mono {
-	font-size: 9pt;
+	font-size: 10pt;
 	font-family: Consolas, courier;
-	fill: #aaa;
-}
-
-text.axis-workweek {
-	fill: #000;
-}
-
-text.axis-worktime {
 	fill: #000;
 }
