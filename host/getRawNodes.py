@@ -1,7 +1,9 @@
+import os,re,json
+import readConfig as c
+
+#(after readRaw)
 #It reads ssupervisor_sinfo1.js and get nodes and their respective state to write into nodes_sinfo.js
-def getRawNodesJSON():
-	import os,re,json
-	import readConfig as c
+def getNodeInfo():
 
 	#Path and configurations
 	PATH = c.readConfig('config.txt','path_data')
@@ -118,24 +120,55 @@ def getRawNodesJSON():
 
 
 
+
+
+def writeOutNodeData(json_data,json_stats,tsv_concat,list_hist):
+	OUTFILEPATHsinfo = 'app/js/nodes_sinfo.js'
+	OUTFILEPATHstats = 'app/js/nodes_stats.js'
+	OUTFILEPATHtsv = 'app/nodes.tsv'
+	OUTFILEPATHsinfohist = 'app/js/sinfohist.js'
+
+	with open(OUTFILEPATHsinfo,'w+') as outfile:
+		outfile.write('var nodes = ')
+		outfile.write(json_data)
+		outfile.write(';')
+	with open(OUTFILEPATHstats,'w+') as outfile:
+		outfile.write('var stats = ')
+		outfile.write(json_stats)
+		outfile.write(';')
+	with open(OUTFILEPATHtsv,'w+') as outfile:
+		outfile.write(tsv_concat)
+	with open(OUTFILEPATHsinfohist,'w+') as outfile:
+		outfile.write('var alloc_hist = ')
+		outfile.write(str(list(list_hist[0])))
+		outfile.write(';\n')
+		outfile.write('var idle_hist = ')
+		outfile.write(str(list(list_hist[1])))
+		outfile.write(';\n')
+		outfile.write('var down_hist = ')
+		outfile.write(str(list(list_hist[2])))
+		outfile.write(';\n')
+		outfile.write('var label_hist = ')
+		outfile.write(str(list(list_hist[3])))
+		outfile.write(';\n')
+	print('Node information was written out succesfully')
+
+
 if __name__=="__main__":
 	import json
 	import time, datetime
 	from collections import deque
 
 	alloc_hist,idle_hist,down_hist,label_hist = deque(),deque(),deque(),deque()
+	list_hist=[]
 	frequency=0
 	th_enable=datetime.datetime.now()-datetime.timedelta(seconds=10)
 
 	while True:
 		now = datetime.datetime.now()
 
-		list_dic, stats_dic, tsv_concat = getRawNodesJSON()
+		list_dic, stats_dic, tsv_concat = getNodeInfo()
 
-		OUTFILEPATHsinfo = 'app/js/nodes_sinfo.js'
-		OUTFILEPATHstats = 'app/js/nodes_stats.js'
-		OUTFILEPATHtsv = 'app/nodes.tsv'
-		OUTFILEPATHsinfohist = 'app/js/sinfohist.js'
 
 		if now-th_enable>datetime.timedelta(seconds=5):
 			th_enable=datetime.datetime.now()
@@ -143,31 +176,12 @@ if __name__=="__main__":
 
 			json_data = json.dumps(list_dic).replace('{','\n{')
 			json_stats = json.dumps(stats_dic)
-			with open(OUTFILEPATHsinfo,'w+') as outfile:
-				outfile.write('var nodes = ')
-				outfile.write(json_data)
-				outfile.write(';')
-			with open(OUTFILEPATHstats,'w+') as outfile:
-				outfile.write('var stats = ')
-				outfile.write(json_stats)
-				outfile.write(';')
-			with open(OUTFILEPATHtsv,'w+') as outfile:
-				outfile.write(tsv_concat)
-			with open(OUTFILEPATHsinfohist,'w+') as outfile:
-				outfile.write('var alloc_hist = ')
-				outfile.write(str(list(alloc_hist)))
-				outfile.write(';\n')
-				outfile.write('var idle_hist = ')
-				outfile.write(str(list(idle_hist)))
-				outfile.write(';\n')
-				outfile.write('var down_hist = ')
-				outfile.write(str(list(down_hist)))
-				outfile.write(';\n')
-				outfile.write('var label_hist = ')
-				outfile.write(str(list(label_hist)))
-				outfile.write(';\n')
+			list_hist=[alloc_hist,idle_hist,down_hist,label_hist]
 
-		if frequency>=1:
+			writeOutNodeData(json_data,json_stats,tsv_concat,list_hist)
+
+
+		if frequency>=1:#1 to test, 60 to real
 			frequency=0
 			alloc_hist.append(stats_dic['allocs'])
 			idle_hist.append(stats_dic['idles'])
@@ -178,5 +192,3 @@ if __name__=="__main__":
 				idle_hist.popleft()
 				down_hist.popleft()
 				label_hist.popleft()
-
-			print alloc_hist
