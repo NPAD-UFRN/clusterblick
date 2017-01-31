@@ -7,7 +7,7 @@ cli1@email.com, cli2@email.com
 
 #Path configuration:
 raw: './raw/'
-data:'./data/'
+data:'./app/js/'
 
 #Raw files:
 ssupervisor_ping.txt,ssupervisor_sinfo3.txt,ssupervisor_dfh1.txt,ssupervisor_sinfo1.txt,ssupervisor_sinfo2.txt,ssupervisor_squeue1.txt
