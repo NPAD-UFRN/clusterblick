@@ -1,0 +1,12 @@
+#!/bin/bash
+file=$1
+destination=$2
+port=$3
+
+echo $(date "+%d/%m/%y %T") > $file
+
+echo "[s0cpu] CPU usage of service0" >> $file
+cat <(grep 'cpu ' /proc/stat) <(sleep 1 && grep 'cpu ' /proc/stat) | awk -v RS="" '{print ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5) "%"}' >> $file
+echo $'#  #' >> $file
+
+scp -P $port $file $destination

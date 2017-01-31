@@ -193,3 +193,6 @@ def writeOutInfo(json_data,json_stats,tsv_concat,list_hist):
 		outfile.write('var sumjobspd = ')
 		outfile.write(str(list(list_hist[5])))
 		outfile.write(';\n')
+		outfile.write('var label_hist = ')
+		outfile.write(str(list(list_hist[3])))
+		outfile.write(';\n')

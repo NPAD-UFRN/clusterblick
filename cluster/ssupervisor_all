@@ -9,3 +9,4 @@ port=$4
 ./supervisoring/ssupervisor_squeue1 "$path/ssupervisor_squeue1.txt" $destination $port &> /dev/null
 ./supervisoring/ssupervisor_dfh1 "$path/ssupervisor_dfh1.txt" $destination $port &> /dev/null
 ./supervisoring/ssupervisor_ping $ip_service "$path/ssupervisor_ping.txt" $destination $port &> /dev/null
+./supervisoring/ssupervisor_s0cpu "$path/ssupervisor_s0cpu.txt" $destination $port &> /dev/null
