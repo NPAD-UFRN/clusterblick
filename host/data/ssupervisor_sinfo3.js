@@ -1,1 +1,0 @@
-var ssupervisor_sinfo3 = "5\n";
