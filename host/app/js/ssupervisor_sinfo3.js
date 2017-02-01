@@ -1,1 +1,1 @@
-var ssupervisor_sinfo3 = "5\n";
+var ssupervisor_sinfo3 = 5;

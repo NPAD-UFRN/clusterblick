@@ -213,7 +213,7 @@ function Gauge(placeholderName, configuration)
 	{
 		var pointerContainer = this.body.select(".pointerContainer");
 
-		pointerContainer.selectAll("text").text(value+"T");
+		pointerContainer.selectAll("text").text(value+"%");
 
 		var pointer = pointerContainer.selectAll("path");
 		pointer.transition()

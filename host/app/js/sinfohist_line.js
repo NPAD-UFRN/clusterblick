@@ -54,6 +54,14 @@ var sinfoHistChart = new Chart(ctx, {
   type:'line',
   data:startingData,
   options: {
+          title:{
+            display:true,
+            text: "sinfo",
+            fontSize:28,
+          },
+          legend:{
+            position:'bottom'
+          },
           scales: {
             xAxes: [{
               display:false

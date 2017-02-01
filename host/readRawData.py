@@ -40,13 +40,18 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 			elif line[0]=='[':
 				q_title.append(line)
 				counter +=1
-			#working on non-email input files
+			#working on ordindary input files
 			elif counter>=2 and flag_email==0:
 				if line[0]=='#':
 					break
 				elif counter==2:
-					keys = line.split()
-					counter +=1
+					if raw_name=='ssupervisor_s0cpu':
+						dic_data=float(line[:-2])
+						print line[:-1]
+						break
+					else:
+					    keys = line.split()
+					    counter +=1
 				else:
 					if line[0:14]=='Not responding':
 						line = line.replace('Not responding', 'Not_responding')
@@ -56,13 +61,13 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 					dic_data.append(dic)
 					dic={}
 					counter+=1
-			#working on email input files
+			#working on 'email' input files
 			elif counter>=2 and flag_email==1:
 
 				if ' 0% packet loss' in line:
 					email_data=1
 				if line[0:5]=='NODES':
-					email_data=lines[lines.index(line)+1]
+					email_data=int(lines[lines.index(line)+1])
 				counter+=1
 
 		#write into path_out/JSONs
@@ -80,9 +85,11 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 	return general_dic
 
 if __name__=="__main__":
+
+
 	#readRaw Usage example:
-	path = './raw/'
-	path_out = './app/js/'
-	raw_list = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
+	path = '/raw/'
+	path_out = '/app/js/'
+	raw_list = ['ssupervisor_s0cpu.txt','ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
 	raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
 	dic = readRaw(raw_list,raw_list_email,path,path_out)

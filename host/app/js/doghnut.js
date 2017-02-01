@@ -2,6 +2,14 @@ var ctx = "donut";
 
 
 var options = {
+    title:{
+      display:true,
+      text: "sinfo now",
+      fontSize:28,
+    },
+    legend:{
+      position:'bottom'
+    },
     responsive: false,
     showAllTooltips: true,
     tooltips: {

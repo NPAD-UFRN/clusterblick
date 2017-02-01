@@ -1,2 +1,2 @@
-var sumnodepd = [9, 9];
-var sumjobspd = [2, 2];
+var sumnodepd = [3, 15];
+var sumjobspd = [2, 15];

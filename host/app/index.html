@@ -15,9 +15,11 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 		<script type="text/javascript" src="js/ssupervisor_dfh1.js"></script>
+    <script type="text/javascript" src="js/ssupervisor_s0cpu.js"></script>
     <script type="text/javascript" src="js/ssupervisor_squeue1.js"></script>
 		<script type="text/javascript" src="js/nodes_stats.js"></script>
     <script type="text/javascript" src="js/sinfohist.js"></script>
+    <script type="text/javascript" src="js/queuehist.js"></script>
 		<script type="text/javascript" src="js/actvgauges.js"></script>
     <script type="text/javascript" src="gridnodes.js"></script>
 
@@ -80,17 +82,22 @@
               <p>ClusterBlick</p>
             </div>
       			<div class="row graphs">
-              <div class="col-sm-4">
-                <div id="sinfohist"><canvas id="updating-chart" width="600" height="400"></canvas></div>
+              <div class="col-sm-6">
+                <div class="linechart" id="squeuehist"><canvas id="queueHist" width="500" height="400"></canvas></div>
+                <script type="text/javascript" src="js/squeuehist_chart.js"></script>
+              </div>
+              <div class="col-sm-5">
+                <div class="linechart" id="sinfohist"><canvas id="updating-chart" width="500" height="400"></canvas></div>
                 <script type="text/javascript" src="js/sinfohist_line.js"></script>
               </div>
       			</div>
 
 
       			<div class="row">
-      				<div class="col-sm-6 gauges" >
-      					<span id="service0"></span>
-      					<span id="lustre"></span>
+      				<div class="col-sm-8 gauges" >
+      					<span class="gauge" id="service0mem"></span>
+                <span class="gauge" id="service0cpu"></span>
+      					<span class="gauge" id="lustre"></span>
       				</div>
       				<div class="col-sm-3" >
       					<div id="donutt"><canvas id="donut" width="250" height="250"></canvas></div>
