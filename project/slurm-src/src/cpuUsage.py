@@ -1,3 +1,5 @@
+#WARNING: THIS FILE HAS TO BE IN CLUSTER LOGIN SERVICE foo/bar/clusterblick/src
+
 import time
 
 INTERVAL = 0.1

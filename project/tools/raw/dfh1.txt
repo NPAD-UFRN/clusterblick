@@ -1,8 +1,8 @@
-05/01/17 11:19:29
+02/02/17 11:30:59
 [df -h] Memory monitoring
 Filesystem                Size  Used Avail Use% Mounted on
-/dev/sda31                2,7T  1,7T  922G  65% /
+/dev/sda31                2,7T  1,8T  782G  71% /
 tmpfs                      63G   60K   63G   1% /dev/shm
 /dev/sda11                291M   49M  227M  18% /boot
-mds01.ib1@o2ib1:/lustre1   59T   43T   13T  77% /misc/lustre1
+mds01.ib1@o2ib1:/lustre1   59T   46T   10T  82% /misc/lustre1
 #  #

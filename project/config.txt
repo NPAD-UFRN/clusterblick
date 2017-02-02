@@ -6,14 +6,14 @@ passw
 cli1@email.com, cli2@email.com
 
 #Path configuration:
-raw: './raw/'
+raw: './tools/raw/'
 data:'./app/js/'
 
 #Raw files:
-ssupervisor_ping.txt,ssupervisor_sinfo3.txt,ssupervisor_dfh1.txt,ssupervisor_sinfo1.txt,ssupervisor_sinfo2.txt,ssupervisor_squeue1.txt
+ping.txt,sinfo3.txt,dfh1.txt,sinfo1.txt,sinfo2.txt,squeue1.txt
 
 #Raw files to email: (must be in raw_files as well)
-ssupervisor_ping.txt,ssupervisor_sinfo3.txt
+ping.txt,sinfo3.txt
 
 #Node names allowed:
 'rAiBnC', 'serviceX'

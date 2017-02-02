@@ -1,0 +1,7 @@
+02/02/17 11:30:57
+[sinfo] General Information about nodes and partitions for a system running Slurm
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+cluster*     up 20-00:00:0     68  alloc r1i0n[0-7,9-12,14-17],r1i1n[0-7,9-16],r1i2n[0-7,9-16],r1i3n[0-7,9-16],service[1-4]
+test         up      30:00     68  alloc r1i0n[0-7,9-12,14-17],r1i1n[0-7,9-16],r1i2n[0-7,9-16],r1i3n[0-7,9-16],service[1-4]
+service      up 20-00:00:0      4  alloc service[1-4]
+#  #
