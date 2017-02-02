@@ -12,7 +12,18 @@ html, body, .container-fluid{
 	float: right;
 	width:20%;
 }
-
+#s0title{
+	display:block;
+	font-size: 28px;
+	font-family: modern;
+	font-style: oblique;
+	margin-left: 190px;
+}
+#s0title span{
+	display:block;
+	float: right;
+	margin-right: 180px;
+}
 .row{
     overflow: hidden;
 }
@@ -21,11 +32,11 @@ html, body, .container-fluid{
     margin-bottom: -99999px;
     padding-bottom: 99999px;
 }
-span .gauge{
-	margin-right: 20px;
+#lustre{
+	margin-left: 200px;
 }
 .graphs{
-	height: 60%;
+	height: 55%;
 	padding-top: 50px;
 	padding-left: 150px;
 }
@@ -39,13 +50,7 @@ span .gauge{
 }
 
 .row .gauges{
-	padding-left:100px;
-}
-#service0, #lustre{
-	margin-right:100px;
-}
-#donutt{
-	margin-right:100px;
+	padding-left:200px;
 }
 rect.bordered {
 	stroke: #E6E6E6;

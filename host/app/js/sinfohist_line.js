@@ -57,6 +57,8 @@ var sinfoHistChart = new Chart(ctx, {
           title:{
             display:true,
             text: "sinfo",
+            fontFamily:"modern",
+            fontStyle:"oblique",
             fontSize:28,
           },
           legend:{

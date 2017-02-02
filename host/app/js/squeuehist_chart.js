@@ -6,21 +6,6 @@ var queueHistChart = new Chart(ctx, {
         labels: label_hist,
         datasets: [
             {
-                type: 'line',
-                label: "Nós PD",
-                fill: false,
-                backgroundColor: "rgba(255,153,51, 0.7)",
-                borderColor: "rgba(255,153,51,1)",
-                pointBorderColor: "rgba(255,153,51,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 0,
-                pointHoverRadius: 10,
-                pointHoverBackgroundColor: "rgba(255,153,51,1)",
-                pointRadius: 2,
-                pointHitRadius: 10,
-                data: sumnodepd,
-            },
-            {
                 type: 'bar',
                 label: 'Jobs PD',
                 fill: true,
@@ -34,6 +19,21 @@ var queueHistChart = new Chart(ctx, {
                 pointRadius: 2,
                 pointHitRadius: 10,
                 data: sumjobspd,
+            },
+            {
+                type: 'line',
+                label: "Nodes PD",
+                fill: true,
+                backgroundColor: "rgba(255,153,51, 0.7)",
+                borderColor: "rgba(255,153,51,1)",
+                pointBorderColor: "rgba(255,153,51,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 10,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(255,153,51,1)",
+                pointRadius: 2,
+                pointHitRadius: 10,
+                data: sumnodepd,
             }
 
         ]
@@ -42,6 +42,8 @@ var queueHistChart = new Chart(ctx, {
             title:{
               display:true,
               text: "squeue",
+              fontFamily:"modern",
+              fontStyle:"oblique",
               fontSize:28,
             },
             legend:{

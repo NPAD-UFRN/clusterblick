@@ -4,7 +4,7 @@ function createGauges()
 {
 	createGauge("service0mem", "Memory",0,100);
 	createGauge("service0cpu", "CPU",0,100);
-	createGauge("lustre", "Lustre",0,100);
+	createGauge("lustre", "Memory",0,100);
 }
 
 function updateGauges()

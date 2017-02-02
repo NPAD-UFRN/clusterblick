@@ -17,7 +17,6 @@
 		<script type="text/javascript" src="js/ssupervisor_dfh1.js"></script>
     <script type="text/javascript" src="js/ssupervisor_s0cpu.js"></script>
     <script type="text/javascript" src="js/ssupervisor_squeue1.js"></script>
-		<script type="text/javascript" src="js/nodes_stats.js"></script>
     <script type="text/javascript" src="js/sinfohist.js"></script>
     <script type="text/javascript" src="js/queuehist.js"></script>
 		<script type="text/javascript" src="js/actvgauges.js"></script>
@@ -94,15 +93,11 @@
 
 
       			<div class="row">
-      				<div class="col-sm-8 gauges" >
+      				<div class="col-sm-10 gauges" >
+                <p id="s0title">service0 <span>lustre</span></p>
       					<span class="gauge" id="service0mem"></span>
                 <span class="gauge" id="service0cpu"></span>
       					<span class="gauge" id="lustre"></span>
-      				</div>
-      				<div class="col-sm-3" >
-      					<div id="donutt"><canvas id="donut" width="250" height="250"></canvas></div>
-      					<script type="text/javascript" src="js/doghnut.js"></script>
-                <div id="chartjs-tooltip"></div>
       				</div>
       			</div>
       		</div>
