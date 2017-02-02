@@ -1,56 +1,97 @@
+#containerleft{
+	height: 100%;
+	width: 75%;
+	display: block;
+	float: left;
+	background-color: #f1f1f1;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	padding-left: 40px;
+	padding-right:2.5px;
+}
+#containerright{
+	height:100%;
+	width:25%;
+	display: block;
+	float: right;
+	background-color: #f1f1f1;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#rowtitle{
+	height: 20%;
+	width: 100%;
+	padding: 15px;
+	background-color: white;
+}
+#rowchart1{
+	height: 40%;
+	width: 100%;
+	padding: 10px 15px 15px 15px;
+	background-color: white;
+	margin-top: 10px;
+}
+#rowchart2{
+	height: 40%;
+	width: 100%;
+	padding: 10px 15px 15px 15px;
+	background-color: white;
+	margin-top: 10px;
+}
+#rownode{
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	padding-left: 50px;
+}
+#coltitle{
+}
+#colgaugeright{
+	padding-left: 11%;
+}
+#colchart1{
+}
+#colchart2{
+}
+
+#title{
+	font-family: modern;
+	font-size: 64px;
+	font-style: oblique;
+	color: #000;
+	margin-top: 10px;
+}
+#lustre{
+	margin-left: 20px;
+}
+#gaugetitle{
+	display:block;
+	font-size: 20px;
+	font-family: modern;
+	font-style: oblique;
+	margin-left: 15%;
+}
+#gaugetitle span{
+	display:block;
+	float: right;
+	margin-right: 45%;
+}
 html, body, .container-fluid{
 	margin: 0;
 	height: 100%;
 	font: 10px arial;
 	width:auto;
-}
-#left{
-	float:left;
-	width:80%;
-}
-#right{
-	float: right;
-	width:20%;
-}
-#s0title{
-	display:block;
-	font-size: 28px;
-	font-family: modern;
-	font-style: oblique;
-	margin-left: 190px;
-}
-#s0title span{
-	display:block;
-	float: right;
-	margin-right: 180px;
+	background-color: #f1f1f1;
 }
 .row{
     overflow: hidden;
-}
-
-[class*="col-"]{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-}
-#lustre{
-	margin-left: 200px;
 }
 .graphs{
 	height: 55%;
 	padding-top: 50px;
 	padding-left: 150px;
-}
-.title p{
-	font-family: modern;
-	font-size: 64px;
-	font-style: oblique;
-	color: #616161;
-	margin-left: 100px;
-	margin-top: 10px;
-}
-
-.row .gauges{
-	padding-left:200px;
 }
 rect.bordered {
 	stroke: #E6E6E6;

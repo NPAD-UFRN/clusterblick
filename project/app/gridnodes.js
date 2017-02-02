@@ -1,5 +1,5 @@
 var margin = { top: 50, right: 0, bottom: 100, left: 30 },
-          width = 960 - margin.left - margin.right,
+          width = 620 - margin.left - margin.right,
           height = 900 - margin.top - margin.bottom,
           gridSize = Math.floor(width / 20),
           legendElementWidth = 50,

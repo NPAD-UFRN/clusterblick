@@ -55,67 +55,44 @@
 		</script>
 
 
-		<script>
-
-
-
-		</script>
-
-<style>
-  .master{
-    background-color:red;
-  }
-  .master2{
-    background-color:green;
-  }
-</style>
-
-
 	</head>
 
 
 	<body onload="initialize()">
-      		<div class="container-fluid" id="left">
 
-            <div class="row title">
-              <p>ClusterBlick</p>
-            </div>
-      			<div class="row graphs">
-              <div class="col-sm-6">
-                <div class="linechart" id="squeuehist"><canvas id="queueHist" width="500" height="400"></canvas></div>
-                <script type="text/javascript" src="js/squeuehist_chart.js"></script>
-              </div>
-              <div class="col-sm-5">
-                <div class="linechart" id="sinfohist"><canvas id="updating-chart" width="500" height="400"></canvas></div>
-                <script type="text/javascript" src="js/sinfohist_line.js"></script>
-              </div>
-      			</div>
+      <div class="container-fluid" id="containerleft">
+        <div class="row" id="rowtitle">
+          <div class="col-sm-6" id="coltitle">
+            <p id="title">ClusterBlick</p>
+          </div>
+          <div class="col-sm-6" id="colgaugeright">
+            <p id="gaugetitle">service0 <span id="gaugetitle2">Lustre</span></p>
+            <span class="gauge" id="service0mem"></span>
+            <span class="gauge" id="service0cpu"></span>
+            <span class="gauge" id="lustre"></span>
+          </div>
+        </div>
+        <div class="row" id="rowchart1">
+          <div class="col-sm-12" id="colchart1">
+            <div class="linechart" id="squeuehist"><canvas id="queueHist" width="870" height="200"></canvas></div>
+            <script type="text/javascript" src="js/squeuehist_chart.js"></script>
+          </div>
+        </div>
+        <div class="row" id="rowchart2">
+          <div class="col-sm-12" id="colchart2">
+            <div class="linechart" id="sinfohist"><canvas id="updating-chart" width="870" height="200"></canvas></div>
+            <script type="text/javascript" src="js/sinfohist_line.js"></script>
+          </div>
+        </div>
+      </div>
 
-
-      			<div class="row">
-      				<div class="col-sm-10 gauges" >
-                <p id="s0title">service0 <span>lustre</span></p>
-      					<span class="gauge" id="service0mem"></span>
-                <span class="gauge" id="service0cpu"></span>
-      					<span class="gauge" id="lustre"></span>
-      				</div>
-      			</div>
-      		</div>
-
-          <div class="container-fluid" id="right">
-            <div class="row ">
-              <div class="col-sm-2">
-                <div id="nodegrid"></div>
-                <script type="text/javascript" src="gridnodes.js"> </script>
-              </div>
-      			</div>
-      		</div>
+      <div class="container-fluid" id="containerright">
+        <div class="row" id="rownode">
+          <div id="nodegrid"></div>
+          <script type="text/javascript" src="gridnodes.js"> </script>
+        </div>
+      </div>
 
 
 
-
-
-
-	</body>
-
-</html>
+  </body>
