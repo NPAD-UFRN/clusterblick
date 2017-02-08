@@ -1,0 +1,4 @@
+02/02/17 11:30:58
+[sinfo -R] Down nodes explanation
+REASON               USER      TIMESTAMP           NODELIST
+#  #

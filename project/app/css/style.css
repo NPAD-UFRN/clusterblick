@@ -1,0 +1,109 @@
+#containerleft{
+	height: 100%;
+	width: 75%;
+	display: block;
+	float: left;
+	background-color: #f1f1f1;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	padding-left: 40px;
+	padding-right:2.5px;
+}
+#containerright{
+	height:100%;
+	width:25%;
+	display: block;
+	float: right;
+	background-color: #f1f1f1;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#rowtitle{
+	height: 20%;
+	width: 100%;
+	padding: 15px;
+	background-color: white;
+}
+#rowchart1{
+	height: 40%;
+	width: 100%;
+	padding: 10px 15px 15px 15px;
+	background-color: white;
+	margin-top: 10px;
+}
+#rowchart2{
+	height: 40%;
+	width: 100%;
+	padding: 10px 15px 15px 15px;
+	background-color: white;
+	margin-top: 10px;
+}
+#rownode{
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	padding-left: 50px;
+}
+#coltitle{
+	padding: 30px;
+}
+#colchart1{
+}
+#colchart2{
+}
+#colgauge1 p{
+	font-size: 24px;
+	font-family: modern;
+	font-style: oblique;
+	text-align: center;
+}
+#colgauge2{
+
+}
+#service0mem{
+	margin-left: 40px;
+}
+#lustre{
+	margin-left: 96px;
+}
+#colgauge2 p{
+	font-size: 24px;
+	font-family: modern;
+	font-style: oblique;
+	text-align: center;
+}
+#title{
+	font-family: modern;
+	font-size: 64px;
+	font-style: oblique;
+	color: #000;
+	margin-top: 10px;
+}
+
+
+html, body, .container-fluid{
+	margin: 0;
+	height: 100%;
+	font: 10px arial;
+	width:auto;
+	background-color: #f1f1f1;
+}
+.row{
+    overflow: hidden;
+}
+.graphs{
+	height: 55%;
+	padding-top: 50px;
+	padding-left: 150px;
+}
+rect.bordered {
+	stroke: #E6E6E6;
+	stroke-width:2px;
+}
+text.mono {
+	font-size: 10pt;
+	font-family: Consolas, courier;
+	fill: #000;
+}

@@ -1,0 +1,13 @@
+#!/bin/bash
+file=$1
+destination=$2
+port=$3
+path=$4
+
+echo $(date "+%d/%m/%y %T") > $file
+
+echo "[s0cpu] CPU usage of service0" >> $file
+python $path/src/cpuUsage.py >> $file
+echo $'#  #' >> $file
+
+scp -P $port $file $destination

@@ -11,7 +11,7 @@ The host is the computer that maintain the supervisor static javascrip applicati
 
 ####App demo
 
-![Demo](https://raw.githubusercontent.com/adelsondias/cluster-supervisor/master/host/app/print.png)
+![Demo](https://raw.githubusercontent.com/adelsondias/cluster-supervisor/master/project/app/print.png)
 
 ###references
 

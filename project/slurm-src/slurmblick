@@ -1,0 +1,13 @@
+#!/bin/bash
+path=$1           #cluster path to receive slurm output ("/home/user/clusterblick/raw")
+destination=$2    #app path to receive cluster ouput ("foo@app:/home/foo/bar/raw")
+ip_service=$3     #ip of cluster login service e.g. ("xxx.xxx.xxx.xxx")
+port=$4           #usable ssh port of cluster login ("8080")
+user_service=$5	  #user of cluster login  ("user")
+
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/sinfo1 "$path/sinfo1.txt" $destination $port &> /dev/null
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/sinfo2 "$path/sinfo2.txt" $destination $port &> /dev/null
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/squeue1 "$path/squeue1.txt" $destination $port &> /dev/null
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/dfh1 "$path/dfh1.txt" $destination $port &> /dev/null
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/ping $ip_service "$path/ping.txt" $destination $port &> /dev/null
+ssh -p$port $user_service@$ip_service 'bash -s' < ./src/s0cpu "$path/s0cpu.txt" $destination $port "$path/.." &> /dev/null

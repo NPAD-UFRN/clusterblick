@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  	<head>
+    	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+    	<title>Cluster Monitoring</title>
+
+
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+
+		<script type="text/javascript" src="d3v3.js"></script>
+		<script type="text/javascript" src="js/Chart.bundle.js"></script>
+		<script type="text/javascript" src="js/gaugelib.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/dfh1.js"></script>
+    <script type="text/javascript" src="js/s0cpu.js"></script>
+    <script type="text/javascript" src="js/squeue1.js"></script>
+    <script type="text/javascript" src="js/sinfohist.js"></script>
+    <script type="text/javascript" src="js/queuehist.js"></script>
+		<script type="text/javascript" src="js/actvgauges.js"></script>
+    <script type="text/javascript" src="gridnodes.js"></script>
+
+    <script type="text/javascript" src="js/queuehist.js"></script>
+
+
+		<script>
+			function initialize()
+			{
+				createGauges();
+				setInterval(updateGauges, 5000);
+			} //updating gauges
+
+      function reload_js(src) {
+				$('script[src="' + src + '"]').remove();
+				$('<script>').attr('src', src).appendTo('head');
+			}
+
+			setInterval(function(){
+				reload_js("js/nodes_stats.js");
+				reload_js("js/ssupervisor_dfh1.js");
+        reload_js("js/sinfohist.js");
+        reload_js("js/queuehist.js");
+				//myDoughnutChart.chart.config.data.datasets[0].data=[stats.allocs,stats.idles,stats.downs];
+				//myDoughnutChart.update();    //updating donut chart
+        sinfoHistChart.chart.config.data.datasets[0].data = down_hist;
+        sinfoHistChart.chart.config.data.datasets[1].data = idle_hist;
+        sinfoHistChart.chart.config.data.datasets[2].data = alloc_hist;
+        sinfoHistChart.chart.config.data.labels = label_hist;
+				sinfoHistChart.update();
+
+        queueHistChart.chart.config.data.datasets[0].data = sumjobspd;
+        queueHistChart.chart.config.data.datasets[1].data = sumnodepd;
+        queueHistChart.chart.config.data.labels = label_hist;
+				queueHistChart.update();
+
+        heatmapChart(datasets[0],1); //updating node grid
+			}, 1000);
+
+		</script>
+
+
+	</head>
+
+
+	<body onload="initialize()">
+
+      <div class="container-fluid" id="containerleft">
+        <div class="row" id="rowtitle">
+
+          <div class="col-sm-6" id="coltitle">
+            <p id="title">ClusterBlick</p>
+          </div>
+          <div class="col-sm-3" id="colgauge1">
+            <p>service0</p>
+            <span class="gauge" id="service0mem"></span>
+            <span class="gauge" id="service0cpu"></span>
+          </div>
+          <div class="col-sm-3" id="colgauge2">
+            <p>Lustre</p>
+            <span class="gauge" id="lustre"></span>
+          </div>
+
+        </div>
+        <div class="row" id="rowchart1">
+          <div class="col-sm-12" id="colchart1">
+            <div class="linechart" id="squeuehist"><canvas id="queueHist" width="1280" height="300"></canvas></div>
+            <script type="text/javascript" src="js/squeuehist_chart.js"></script>
+          </div>
+        </div>
+        <div class="row" id="rowchart2">
+          <div class="col-sm-12" id="colchart2">
+            <div class="linechart" id="sinfohist"><canvas id="updating-chart" width="1280" height="300"></canvas></div>
+            <script type="text/javascript" src="js/sinfohist_line.js"></script>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid" id="containerright">
+        <div class="row" id="rownode">
+          <div id="nodegrid"></div>
+          <script type="text/javascript" src="gridnodes.js"> </script>
+        </div>
+      </div>
+
+
+
+  </body>
