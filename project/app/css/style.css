@@ -47,15 +47,33 @@
 	padding-left: 50px;
 }
 #coltitle{
-}
-#colgaugeright{
-	padding-left: 11%;
+	padding: 30px;
 }
 #colchart1{
 }
 #colchart2{
 }
+#colgauge1 p{
+	font-size: 24px;
+	font-family: modern;
+	font-style: oblique;
+	text-align: center;
+}
+#colgauge2{
 
+}
+#service0mem{
+	margin-left: 40px;
+}
+#lustre{
+	margin-left: 96px;
+}
+#colgauge2 p{
+	font-size: 24px;
+	font-family: modern;
+	font-style: oblique;
+	text-align: center;
+}
 #title{
 	font-family: modern;
 	font-size: 64px;
@@ -63,21 +81,8 @@
 	color: #000;
 	margin-top: 10px;
 }
-#lustre{
-	margin-left: 20px;
-}
-#gaugetitle{
-	display:block;
-	font-size: 20px;
-	font-family: modern;
-	font-style: oblique;
-	margin-left: 15%;
-}
-#gaugetitle span{
-	display:block;
-	float: right;
-	margin-right: 45%;
-}
+
+
 html, body, .container-fluid{
 	margin: 0;
 	height: 100%;

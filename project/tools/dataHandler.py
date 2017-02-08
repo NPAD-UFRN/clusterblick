@@ -2,19 +2,20 @@ import os,re,json
 import readConfig as c
 
 #(after readRaw)
-#It reads ssupervisor_sinfo1.js to return a list of node's information
+#It reads sinfo1.js to return a list of node's information
 def getNodeInfo():
 
 	#Path and configurations
 	PATH = c.readConfig('config.txt','path_data')
 	NODE_NAMES_ALLOWED = c.readConfig('config.txt','nn_allowed')
-	FILEPATH = os.path.join(PATH[1:-1], 'ssupervisor_sinfo1.js')
+	FILEPATH = os.path.join(PATH[1:-1], 'sinfo1.js')
 
 	with open(FILEPATH) as f:
 		lines = f.readlines()
 		raw=str(lines)
 		raw = raw.replace('{','\n{')
 		lines = raw.split('\n')
+
 	nodes, states = [], []
 	for line in lines:
 		n_flag, s_flag=0, 0
@@ -40,7 +41,6 @@ def getNodeInfo():
 					s_end=i-2
 			if line[n_start:n_end] not in nodes:
 				nodes.append(line[n_start:n_end])
-			if line[s_start:s_end] not in states:
 				states.append(line[s_start:s_end])
 
 	#splitting nodes names
@@ -122,13 +122,13 @@ def getNodeInfo():
 
 
 #(after readRaw)
-#It reads ssupervisor_squeue1.js to return a list of numbers about jobsPD[1] and nodesPD[0]
+#It reads squeue1.js to return a list of numbers about jobsPD[1] and nodesPD[0]
 def getQueueInfo():
 	import ast
 	#Path and configurations
 	PATH = c.readConfig('config.txt','path_data')
 	NODE_NAMES_ALLOWED = c.readConfig('config.txt','nn_allowed')
-	FILEPATH = os.path.join(PATH[1:-1], 'ssupervisor_squeue1.js')
+	FILEPATH = os.path.join(PATH[1:-1], 'squeue1.js')
 
 	sumnodepd=0
 	sumjobspd=0

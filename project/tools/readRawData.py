@@ -45,7 +45,7 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 				if line[0]=='#':
 					break
 				elif counter==2:
-					if raw_name=='ssupervisor_s0cpu':
+					if raw_name=='s0cpu':
 						dic_data=float(line[:-2])
 						print line[:-1]
 						break
@@ -90,6 +90,6 @@ if __name__=="__main__":
 	#readRaw Usage example:
 	path = 'tools/raw/'
 	path_out = '/app/js/'
-	raw_list = ['ssupervisor_s0cpu.txt','ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt','ssupervisor_dfh1.txt','ssupervisor_sinfo1.txt','ssupervisor_sinfo2.txt','ssupervisor_squeue1.txt']
-	raw_list_email = ['ssupervisor_ping.txt', 'ssupervisor_sinfo3.txt']
+	raw_list = ['s0cpu.txt','ping.txt', 'sinfo3.txt','dfh1.txt','sinfo1.txt','sinfo2.txt','squeue1.txt']
+	raw_list_email = ['ping.txt', 'sinfo3.txt']
 	dic = readRaw(raw_list,raw_list_email,path,path_out)

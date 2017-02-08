@@ -1,3 +1,0 @@
-02/02/17 11:30:41
-[s0cpu] CPU usage of service0
-#  #

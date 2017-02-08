@@ -28,7 +28,7 @@ var queueHistChart = new Chart(ctx, {
                 borderColor: "rgba(255,153,51,1)",
                 pointBorderColor: "rgba(255,153,51,1)",
                 pointBackgroundColor: "#fff",
-                pointBorderWidth: 10,
+                pointBorderWidth: 5,
                 pointHoverRadius: 5,
                 pointHoverBackgroundColor: "rgba(255,153,51,1)",
                 pointRadius: 2,

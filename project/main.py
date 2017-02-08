@@ -1,4 +1,6 @@
 import time
+import sys
+sys.path.insert(0, './tools/')
 import readRawData as r, sendEmail as e, readConfig as c, dataHandler as handler
 import json
 import datetime

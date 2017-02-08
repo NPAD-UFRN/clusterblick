@@ -1,1 +1,1 @@
-var ssupervisor_ping = 1;
+var ping = 1;
