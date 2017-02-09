@@ -38,6 +38,8 @@
 			}
 
 			setInterval(function(){
+        reload_js("js/dfh1.js");
+        reload_js("js/s0cpu.js");
 				reload_js("js/nodes_stats.js");
 				reload_js("js/ssupervisor_dfh1.js");
         reload_js("js/sinfohist.js");
@@ -46,7 +48,9 @@
 				//myDoughnutChart.update();    //updating donut chart
         sinfoHistChart.chart.config.data.datasets[0].data = down_hist;
         sinfoHistChart.chart.config.data.datasets[1].data = idle_hist;
-        sinfoHistChart.chart.config.data.datasets[2].data = alloc_hist;
+        sinfoHistChart.chart.config.data.datasets[2].data = other_hist;
+        sinfoHistChart.chart.config.data.datasets[3].data = resvmant_hist;
+        sinfoHistChart.chart.config.data.datasets[4].data = alloc_hist;
         sinfoHistChart.chart.config.data.labels = label_hist;
 				sinfoHistChart.update();
 

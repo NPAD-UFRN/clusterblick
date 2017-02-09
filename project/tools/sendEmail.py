@@ -1,11 +1,11 @@
-def sendEmail(message):
+def sendEmail(message,subject):
 	import smtplib
 	from email.MIMEMultipart import MIMEMultipart
-	from email.MIMEText import MIMEText 
+	from email.MIMEText import MIMEText
 
 	fromaddr=''
 	toaddr=[]
-	
+
 	with open('config.txt') as config:
 		lines = config.readlines()
 	for line in lines:
@@ -14,12 +14,12 @@ def sendEmail(message):
 			password = lines[lines.index(line)+2]
 		if line[0:15]=='#Email clients:':
 			toaddr = lines[lines.index(line)+1].split(',')
-			
-	for email in toaddr:		
+
+	for email in toaddr:
 		msg = MIMEMultipart()
 		msg['From'] = fromaddr
 		msg['To'] = email
-		SUBJECT = 'Cluster Supervisor'
+		SUBJECT = subject
 
 		msg.attach(MIMEText(message, 'plain'))
 

@@ -12,7 +12,7 @@ from collections import deque
 config = c.readConfig('config.txt','all')
 
 #getRawNodes parameters initializing
-alloc_hist,idle_hist,down_hist,label_hist,nodepd_hist,jobspd_hist = deque(),deque(),deque(),deque(),deque(),deque()
+alloc_hist,idle_hist,resvmant_hist,down_hist,other_hist,label_hist,nodepd_hist,jobspd_hist = deque(),deque(),deque(),deque(),deque(),deque(),deque(),deque()
 list_hist=[]
 frequency=0
 th_enable=datetime.datetime.now()-datetime.timedelta(seconds=10)
@@ -24,7 +24,7 @@ while True:
 	now = datetime.datetime.now()
 
 	#do every 5 seconds
-	if now-th_enable>datetime.timedelta(seconds=5):
+	if now-th_enable>datetime.timedelta(seconds=10):
 		th_enable=datetime.datetime.now()
 		frequency+=1
 
@@ -38,7 +38,7 @@ while True:
 
 		json_data = json.dumps(list_dic).replace('{','\n{')
 		json_stats = json.dumps(stats_dic)
-		list_hist=[alloc_hist,idle_hist,down_hist,label_hist,nodepd_hist,jobspd_hist]
+		list_hist=[alloc_hist,idle_hist,resvmant_hist,down_hist,other_hist,label_hist,nodepd_hist,jobspd_hist]
 		handler.writeOutInfo(json_data,json_stats,tsv_concat,list_hist)
 
 	#do every 5 minutes
@@ -48,38 +48,30 @@ while True:
 		#appending new data
 		alloc_hist.append(stats_dic['allocs'])
 		idle_hist.append(stats_dic['idles'])
+		resvmant_hist.append(stats_dic['resvmants'])
 		down_hist.append(stats_dic['downs'])
+		other_hist.append(stats_dic['others'])
 		label_hist.append(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 		nodepd_hist.append(queueinfo[0])
 		jobspd_hist.append(queueinfo[1])
 		#clean hist to use only 576 elements
-		if len(alloc_hist)>576:
+		if len(alloc_hist)>288:
 			alloc_hist.popleft()
 			idle_hist.popleft()
+			resvmant_hist.popleft()
 			down_hist.popleft()
+			other_hist.popleft()
 			label_hist.popleft()
 			nodepd_hist.popleft()
 			jobspd_hist.popleft()
-
-
-
-
-	#Sending email if something goes wrong - TO UPDATE
-	'''
-	downnodes = general_dict['email_dictionary'].get('ssupervisor_sinfo3',0)
-	pingbool = general_dict['email_dictionary'].get('ssupervisor_ping',None)
-	if pingbool==0 and flag_ping==0:
-		message = '\nWARNING:\n\nPing is not returning any package, please check if the cluster\' service is available and working normally.'
-		print message
-		e.sendEmail(message)
-		flag_ping=1
-	elif pingbool==1 and flag_ping==1:
-		flag_ping=0
-	if downnodes>=4 and flag_down==0:
-		message = '\nWARNING:\n\nThere are {} down nodes. Please check if something unexpected happened.'.format(downnodes)
-		print message
-		e.sendEmail(message)
-		flag_down=1
-	elif downnodes<4 and flag_down==1:
-		flag_down=0
-	'''
+		'''
+		#Sending email if something goes wrong - TO UPDATE
+		pingbool = general_dict['email_dictionary'].get('ssupervisor_ping',None)
+		if pingbool==0 and flag_ping==0:
+			message = '\nWARNING:\n\nPing is not returning any package, please check if the cluster\' service is available and working normally.'
+			print message
+			e.sendEmail(message,'ClusterBlick: Warning')
+			flag_ping=1
+		elif pingbool==1 and flag_ping==1:
+			flag_ping=0
+		'''

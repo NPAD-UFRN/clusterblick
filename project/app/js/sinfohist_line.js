@@ -33,6 +33,34 @@ var canvas = document.getElementById('updating-chart'),
             data: idle_hist
           },
           {
+            label: "Resv/Mant",
+            fill: true,
+            backgroundColor: "rgba(0,102,204,0.7)",
+            borderColor: "rgba(0,102,204,1)",
+            pointBorderColor: "rgba(0,102,204,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 5,
+            pointHoverRadius: 10,
+            pointHoverBackgroundColor: "rgba(0,102,204,1)",
+            pointRadius: 2,
+            pointHitRadius: 10,
+            data: resvmant_hist
+          },
+          {
+            label: "Other",
+            fill: true,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            borderColor: "rgba(0,0,0,1)",
+            pointBorderColor: "rgba(0,0,0,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 5,
+            pointHoverRadius: 10,
+            pointHoverBackgroundColor: "rgba(0,0,0,1)",
+            pointRadius: 2,
+            pointHitRadius: 10,
+            data: other_hist
+          },
+          {
             label: "Allocated",
             fill: true,
             backgroundColor: "rgba(31, 130, 97,0.7)",
@@ -46,6 +74,8 @@ var canvas = document.getElementById('updating-chart'),
             pointHitRadius: 10,
             data: alloc_hist
           }
+
+
 
       ]
     };

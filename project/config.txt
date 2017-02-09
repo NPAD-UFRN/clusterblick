@@ -1,9 +1,9 @@
 #Email configuration:
-config@email.com
-passw
+adelson.dias@gmail.com
+adelson26
 
 #Email clients:
-cli1@email.com, cli2@email.com
+adelsondias@live.com
 
 #Path configuration:
 raw: './tools/raw/'

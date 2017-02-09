@@ -97,25 +97,31 @@ def getNodeInfo():
 				list_dic.append(dic)
 
 	#getting stats_dic and tsv_concat
-	allocs,idles,downs=0,0,0
+	allocs=idles=downs=resvmants=others=0
 	tsv_concat = 'nnn\tiii\tvalue\n'
 	for d in list_dic:
 		if d['state']=='alloc':
 			allocs+=1
-			value=2
+			value=4
 		elif d['state']=='idle':
 			idles+=1
 			value=1
-		else:
+		elif d['state']=='resv' or d['state']=='mant':
+			resvmants+=1
+			value=2
+		elif d['state'][0:4]=='down':
 			downs+=1
 			value=0
+		else:
+			others+=1
+			value=3
 		if d['i']==NODE_NAMES_ALLOWED[1][1:-2]:
 			tsv_concat+=str(int(d['n'])+1)+'\t'+str(5)+'\t'+str(value)+'\n'
 			tsv_concat+=''
 		else:
 			tsv_concat+=str(int(d['n'])+1)+'\t'+str(int(d['i'])+1)+'\t'+str(value)+'\n'
 
-	stats_dic={'allocs':allocs,'idles':idles,'downs':downs}
+	stats_dic={'allocs':allocs,'idles':idles,'resvmants':resvmants,'downs':downs,'others':others}
 
 	return [list_dic,stats_dic,tsv_concat]
 
@@ -180,19 +186,25 @@ def writeOutInfo(json_data,json_stats,tsv_concat,list_hist):
 		outfile.write('var idle_hist = ')
 		outfile.write(str(list(list_hist[1])))
 		outfile.write(';\n')
-		outfile.write('var down_hist = ')
+		outfile.write('var resvmant_hist = ')
 		outfile.write(str(list(list_hist[2])))
 		outfile.write(';\n')
-		outfile.write('var label_hist = ')
+		outfile.write('var down_hist = ')
 		outfile.write(str(list(list_hist[3])))
+		outfile.write(';\n')
+		outfile.write('var other_hist = ')
+		outfile.write(str(list(list_hist[4])))
+		outfile.write(';\n')
+		outfile.write('var label_hist = ')
+		outfile.write(str(list(list_hist[5])))
 		outfile.write(';\n')
 	with open(OUTFILEPATHqueuehist,'w+') as outfile:
 		outfile.write('var sumnodepd = ')
-		outfile.write(str(list(list_hist[4])))
+		outfile.write(str(list(list_hist[6])))
 		outfile.write(';\n')
 		outfile.write('var sumjobspd = ')
-		outfile.write(str(list(list_hist[5])))
+		outfile.write(str(list(list_hist[7])))
 		outfile.write(';\n')
 		outfile.write('var label_hist = ')
-		outfile.write(str(list(list_hist[3])))
+		outfile.write(str(list(list_hist[5])))
 		outfile.write(';\n')
