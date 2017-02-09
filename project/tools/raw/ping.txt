@@ -1,14 +1,14 @@
-02/02/17 11:31:00
+09/02/17 15:36:00
 EMAIL
 [ping -c 4 10.7.32.67] Ping service
 PING 10.7.32.67 (10.7.32.67) 56(84) bytes of data.
-64 bytes from 10.7.32.67: icmp_seq=1 ttl=64 time=0.041 ms
-64 bytes from 10.7.32.67: icmp_seq=2 ttl=64 time=0.015 ms
-64 bytes from 10.7.32.67: icmp_seq=3 ttl=64 time=0.029 ms
-64 bytes from 10.7.32.67: icmp_seq=4 ttl=64 time=0.023 ms
+64 bytes from 10.7.32.67: icmp_seq=1 ttl=64 time=0.029 ms
+64 bytes from 10.7.32.67: icmp_seq=2 ttl=64 time=0.041 ms
+64 bytes from 10.7.32.67: icmp_seq=3 ttl=64 time=0.033 ms
+64 bytes from 10.7.32.67: icmp_seq=4 ttl=64 time=0.026 ms
 
 --- 10.7.32.67 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 2998ms
-rtt min/avg/max/mdev = 0.015/0.027/0.041/0.009 ms
+4 packets transmitted, 4 received, 0% packet loss, time 2999ms
+rtt min/avg/max/mdev = 0.026/0.032/0.041/0.006 ms
 #  #
 

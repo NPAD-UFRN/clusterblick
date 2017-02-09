@@ -1,1 +1,1 @@
-var s0cpu = 0.42;
+var s0cpu = 0.83;

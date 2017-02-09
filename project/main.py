@@ -1,14 +1,12 @@
-import time
-import sys
+import time, sys, os, json, datetime
 sys.path.insert(0, './tools/')
 import readRawData as r, sendEmail as e, readConfig as c, dataHandler as handler
-import json
-import datetime
 from collections import deque
-import subprocess
+import webbrowser
 
-
-#todo: rendering index
+#rendering index.html
+url = 'file:///home/foo/bar/clusterblick/project/app/index.html'
+webbrowser.open(url, new=2)  # open in new tab
 
 #rendering configurations
 config = c.readConfig('config.txt','all')
@@ -17,10 +15,12 @@ config = c.readConfig('config.txt','all')
 alloc_hist,idle_hist,resvmant_hist,down_hist,other_hist,label_hist,nodepd_hist,jobspd_hist = deque(),deque(),deque(),deque(),deque(),deque(),deque(),deque()
 list_hist=[]
 frequency=0
+first_time=1
 th_enable=datetime.datetime.now()-datetime.timedelta(seconds=10)
 
 #command to run slurmblick bash exec
-slurmblick = 'echo nothing'
+slurmblick = "./slurm-src/slurmblick \"/home/user_service/clusterblick/raw\" \"user_localhost@ip_localhost:/home/user/foo/clusterblick/project/tools/raw\" \"ip_service\" \"port_service\" \"user_service\""
+
 
 print '----------------------------------\nClusterBlick on\n----------------------------------\n\n'
 try:
@@ -28,15 +28,14 @@ try:
 		now = datetime.datetime.now()
 
 		#do every 10 seconds
-		if now-th_enable>datetime.timedelta(seconds=10):
+		if now-th_enable>datetime.timedelta(seconds=100):
 			#time controllers
 			th_enable=datetime.datetime.now()
 			frequency+=1
 			print '\n',th_enable
 
 			try:
-				process = subprocess.Popen(slurmblick.split(), stdout=subprocess.PIPE)
-				output, error = process.communicate()
+				os.system(slurmblick)
 				print '0 - slurmblick sucessfuly run in the cluster'
 			except:
 				print ">>except: slurmblick does not sucessfuly attend cluster report"
@@ -62,7 +61,7 @@ try:
 			print '\n'
 
 		#do every 5 minutes
-		if frequency>=1:#1 to test, 60 to real
+		if frequency>=3:#1 to test, 30 to real using
 			frequency=0
 
 			#appending new data

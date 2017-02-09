@@ -16,7 +16,7 @@ var queueHistChart = new Chart(ctx, {
                 pointBorderWidth: 0,
                 pointHoverRadius: 10,
                 pointHoverBackgroundColor: "rgba(0,102,204,1)",
-                pointRadius: 2,
+                pointRadius: 0,
                 pointHitRadius: 10,
                 data: sumjobspd,
             },
@@ -31,7 +31,7 @@ var queueHistChart = new Chart(ctx, {
                 pointBorderWidth: 5,
                 pointHoverRadius: 5,
                 pointHoverBackgroundColor: "rgba(255,153,51,1)",
-                pointRadius: 2,
+                pointRadius: 0,
                 pointHitRadius: 10,
                 data: sumnodepd,
             }

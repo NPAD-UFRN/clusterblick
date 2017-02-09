@@ -1,7 +1,12 @@
-02/02/17 11:30:57
+09/02/17 15:35:58
 [sinfo] General Information about nodes and partitions for a system running Slurm
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-cluster*     up 20-00:00:0     68  alloc r1i0n[0-7,9-12,14-17],r1i1n[0-7,9-16],r1i2n[0-7,9-16],r1i3n[0-7,9-16],service[1-4]
-test         up      30:00     68  alloc r1i0n[0-7,9-12,14-17],r1i1n[0-7,9-16],r1i2n[0-7,9-16],r1i3n[0-7,9-16],service[1-4]
-service      up 20-00:00:0      4  alloc service[1-4]
+cluster*     up 20-00:00:0      3  maint r1i0n15,r1i2n0,service3
+cluster*     up 20-00:00:0     47  alloc r1i0n[0-5,11-12,16-17],r1i1n[1-6,9-12,14],r1i2n[1-2,4,6-7,9-10,12,15-16],r1i3n[0,2-5,7,9-13,15-16],service[1-2,4]
+cluster*     up 20-00:00:0     18   idle r1i0n[6-7,9-10,14],r1i1n[0,7,13,15-16],r1i2n[3,5,11,13-14],r1i3n[1,6,14]
+test         up      30:00      3  maint r1i0n15,r1i2n0,service3
+test         up      30:00     47  alloc r1i0n[0-5,11-12,16-17],r1i1n[1-6,9-12,14],r1i2n[1-2,4,6-7,9-10,12,15-16],r1i3n[0,2-5,7,9-13,15-16],service[1-2,4]
+test         up      30:00     18   idle r1i0n[6-7,9-10,14],r1i1n[0,7,13,15-16],r1i2n[3,5,11,13-14],r1i3n[1,6,14]
+service      up 20-00:00:0      1  maint service3
+service      up 20-00:00:0      3  alloc service[1-2,4]
 #  #
