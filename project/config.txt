@@ -1,16 +1,16 @@
 #Email configuration:
-adelson.dias@gmail.com
-adelson26
+some@some.com
+somepass
 
 #Email clients:
-adelsondias@live.com
+some@client.com,some2@client.com
 
 #Path configuration:
 raw: './tools/raw/'
 data:'./app/js/'
 
 #Raw files:
-ping.txt,dfh1.txt,sinfo1.txt,sinfo2.txt,squeue1.txt
+ping.txt,dfh1.txt,sinfo1.txt,sinfo2.txt,squeue1.txt,s0cpu.txt
 
 #Raw files to email: (must be in raw_files as well)
 ping.txt

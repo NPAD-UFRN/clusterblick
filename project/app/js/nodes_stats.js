@@ -1,1 +1,1 @@
-var stats = {"allocs": 68, "resvmants": 0, "idles": 0, "downs": 0, "others": 0};
+var stats = {"allocs": 48, "resvmants": 2, "idles": 18, "downs": 0, "others": 0};

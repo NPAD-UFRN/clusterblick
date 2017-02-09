@@ -6,7 +6,7 @@ var canvas = document.getElementById('updating-chart'),
       datasets: [
           {
             label: "Down",
-            fill: true,
+            fill: false,
             backgroundColor: "rgba(203, 75, 22, 0.7)",
             borderColor: "rgba(203, 75, 22,1)",
             pointBorderColor: "rgba(203, 75, 22,1)",
@@ -14,13 +14,13 @@ var canvas = document.getElementById('updating-chart'),
             pointBorderWidth: 5,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(203, 75, 22,1)",
-            pointRadius: 2,
+            pointRadius: 1,
             pointHitRadius: 10,
             data: down_hist
           },
           {
             label: "Idle",
-            fill: true,
+            fill: false,
             backgroundColor: "rgba(255, 165, 0, 0.7)",
             borderColor: "rgba(255, 165, 0,1)",
             pointBorderColor: "rgba(255, 165, 0,1)",
@@ -28,13 +28,13 @@ var canvas = document.getElementById('updating-chart'),
             pointBorderWidth: 5,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(255, 165, 0,1)",
-            pointRadius: 2,
+            pointRadius: 1,
             pointHitRadius: 10,
             data: idle_hist
           },
           {
             label: "Resv/Mant",
-            fill: true,
+            fill: false,
             backgroundColor: "rgba(0,102,204,0.7)",
             borderColor: "rgba(0,102,204,1)",
             pointBorderColor: "rgba(0,102,204,1)",
@@ -42,13 +42,13 @@ var canvas = document.getElementById('updating-chart'),
             pointBorderWidth: 5,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(0,102,204,1)",
-            pointRadius: 2,
+            pointRadius: 1,
             pointHitRadius: 10,
             data: resvmant_hist
           },
           {
             label: "Other",
-            fill: true,
+            fill: false,
             backgroundColor: "rgba(0,0,0,0.7)",
             borderColor: "rgba(0,0,0,1)",
             pointBorderColor: "rgba(0,0,0,1)",
@@ -56,7 +56,7 @@ var canvas = document.getElementById('updating-chart'),
             pointBorderWidth: 5,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(0,0,0,1)",
-            pointRadius: 2,
+            pointRadius: 1,
             pointHitRadius: 10,
             data: other_hist
           },
@@ -70,7 +70,7 @@ var canvas = document.getElementById('updating-chart'),
             pointBorderWidth: 5,
             pointHoverRadius: 10,
             pointHoverBackgroundColor: "rgba(31, 130, 97,1)",
-            pointRadius: 2,
+            pointRadius: 1,
             pointHitRadius: 10,
             data: alloc_hist
           }
@@ -99,7 +99,6 @@ var sinfoHistChart = new Chart(ctx, {
               display:false
             }],
             yAxes: [{
-              stacked: true,
               ticks: {
                   stepSize: 10
               }

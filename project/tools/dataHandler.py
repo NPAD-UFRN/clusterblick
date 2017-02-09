@@ -106,7 +106,7 @@ def getNodeInfo():
 		elif d['state']=='idle':
 			idles+=1
 			value=1
-		elif d['state']=='resv' or d['state']=='mant':
+		elif d['state']=='resv' or d['state']=='maint':
 			resvmants+=1
 			value=2
 		elif d['state'][0:4]=='down':

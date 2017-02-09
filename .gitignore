@@ -1,5 +1,4 @@
 *.pyc
 *~
-cluster/supervisoring/raw/ssu*
-host/raw/ssu*
+project/tools/raw/*.txt
 tutorial.txt

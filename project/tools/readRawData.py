@@ -32,7 +32,7 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 			if counter==0:
 				q_date.append(line)
 				counter += 1
-			#checking if it is an EMAIL information (files in raw_list_email have a line EMAIL meaning that its information will be sent via email if some trouble happens)
+			#checking if it is an only EMAIL information (files in raw_list_email)
 			elif line[0:5]=='EMAIL':
 				flag_email=1
 				counter +=1
@@ -47,7 +47,6 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 				elif counter==2:
 					if raw_name=='s0cpu':
 						dic_data=float(line[:-2])
-						print line[:-1]
 						break
 					else:
 					    keys = line.split()
@@ -61,7 +60,7 @@ def readRaw(raw_list,raw_list_email,path,path_out):
 					dic_data.append(dic)
 					dic={}
 					counter+=1
-			#working on 'email' input files
+			#working on only 'email' input files
 			elif counter>=2 and flag_email==1:
 
 				if ' 0% packet loss' in line:
@@ -91,5 +90,5 @@ if __name__=="__main__":
 	path = 'tools/raw/'
 	path_out = '/app/js/'
 	raw_list = ['s0cpu.txt','ping.txt', 'sinfo3.txt','dfh1.txt','sinfo1.txt','sinfo2.txt','squeue1.txt']
-	raw_list_email = ['ping.txt', 'sinfo3.txt']
+	raw_list_email = ['ping.txt']
 	dic = readRaw(raw_list,raw_list_email,path,path_out)

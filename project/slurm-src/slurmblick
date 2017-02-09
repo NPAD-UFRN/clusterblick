@@ -1,6 +1,6 @@
 #!/bin/bash
 path=$1           #cluster path to receive slurm output ("/home/user/clusterblick/raw")
-destination=$2    #app path to receive cluster ouput ("foo@app:/home/foo/bar/raw")
+destination=$2    #app path to receive cluster ouput ("foo@fighters:/home/foo/bar/raw")
 ip_service=$3     #ip of cluster login service e.g. ("xxx.xxx.xxx.xxx")
 port=$4           #usable ssh port of cluster login ("8080")
 user_service=$5	  #user of cluster login  ("user")
