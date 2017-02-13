@@ -72,6 +72,8 @@ def emailControl(general_dict,stats_dic):
 	service0_hdpct = float(general_dict.get('dfh1')[0].get('Use%')[0:-1])
 	if service0_hdpct > 80:
 		s0hdbool=0 #0 means it is going wrong
+	else:
+		s0hdbool=1
 	if s0hdbool==0 and flag_s0hd==0:
 		message = '\nWARNING:\n\nClusterBlick detects service0 HD overuse.\n'
 		print message
@@ -81,8 +83,10 @@ def emailControl(general_dict,stats_dic):
 		flag_s0hd=0
 	#warning for service0 cpu overuse
 	service0_cpupct = float(general_dict.get('s0cpu'))
-	if service0_cpupct > 80:
+	if service0_cpupct > 2:
 		s0cpubool=0 #0 means it is going wrong
+	else:
+		s0cpubool=1
 	if s0cpubool==0 and flag_s0cpu==0:
 		message = '\nWARNING:\n\nClusterBlick detects service0 CPU overuse.\n'
 		print message
@@ -94,7 +98,9 @@ def emailControl(general_dict,stats_dic):
 	#warning for lustre hd overused
 	lustre_hdpct = float(general_dict.get('dfh1')[3].get('Use%')[0:-1])
 	if lustre_hdpct > 90:
-		lushdbool=0
+		lushdbool=0 #0 means it is going wrong
+	else:
+		lushdbool=1
 	if lushdbool==0 and flag_lushd==0:
 		message = '\nWARNING:\n\nClusterBlick detects lustre HD overuse.\n'
 		print message
