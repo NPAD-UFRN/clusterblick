@@ -1,13 +1,16 @@
 #Email configuration:
-some@some.com
+some@email.com
 somepass
 
 #Email clients:
-some@client.com,some2@client.com
+come@client.com
 
 #Path configuration:
-raw: './tools/raw/'
-data:'./app/js/'
+raw:: './tools/raw/'
+data:: './app/js/'
+appindex:: 'file://./app/index.html'
+cluster:: "/home/user/clusterblick/raw"
+server:: "user@ipserver:/path/clusterblick/project/tools/raw"
 
 #Raw files:
 ping.txt,dfh1.txt,sinfo1.txt,sinfo2.txt,squeue1.txt,s0cpu.txt
@@ -17,3 +20,8 @@ ping.txt
 
 #Node names allowed:
 'rAiBnC', 'serviceX'
+
+#Cluster information:
+ip: "ip"
+port: "port"
+user: "userservice"

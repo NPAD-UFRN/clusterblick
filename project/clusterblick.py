@@ -4,13 +4,8 @@ import readRawData as r, sendEmail as e, readConfig as c, dataHandler as handler
 from collections import deque
 import webbrowser
 
-#rendering index.html
-url = 'file:///home/foo/bar/clusterblick/project/app/index.html'
-webbrowser.open(url, new=2)  # open in new tab
-
 #rendering configurations
 config = c.readConfig('config.txt','all')
-
 #main parameters
 alloc_hist,idle_hist,resvmant_hist,down_hist,other_hist,label_hist,nodepd_hist,jobspd_hist = deque(),deque(),deque(),deque(),deque(),deque(),deque(),deque()
 list_hist=[]
@@ -18,9 +13,12 @@ frequency=0
 first_time=1
 th_enable=datetime.datetime.now()-datetime.timedelta(seconds=10)
 
-#command to run slurmblick bash exec
-slurmblick = "./slurm-src/slurmblick \"/home/user_service/clusterblick/raw\" \"user_localhost@ip_localhost:/home/user/foo/clusterblick/project/tools/raw\" \"ip_service\" \"port_service\" \"user_service\""
+#rendering index.html
+url = config['appindex']
+webbrowser.open(url, new=2)  # open in new tab
 
+#command to run slurmblick bash exec
+slurmblick = "./slurm-src/slurmblick {} {} {} {} {}".format(config['path_cluster'],config['path_server'],config['ip'],config['port'],config['user'])
 
 print '----------------------------------\nClusterBlick on\n----------------------------------\n\n'
 try:
@@ -28,7 +26,7 @@ try:
 		now = datetime.datetime.now()
 
 		#do every 10 seconds
-		if now-th_enable>datetime.timedelta(seconds=100):
+		if now-th_enable>datetime.timedelta(seconds=10):
 			#time controllers
 			th_enable=datetime.datetime.now()
 			frequency+=1
@@ -61,8 +59,11 @@ try:
 			print '\n'
 
 		#do every 5 minutes
-		if frequency>=3:#1 to test, 30 to real using
+		if frequency>=1:#1 to test, 30 to real using
 			frequency=0
+
+			#HORA DO RELOGIO DO SITE ESTA ERRADA, esta 29 min a mais
+			now = datetime.datetime.now()-datetime.timedelta(minutes=29)
 
 			#appending new data
 			alloc_hist.append(stats_dic['allocs'])
@@ -70,7 +71,7 @@ try:
 			resvmant_hist.append(stats_dic['resvmants'])
 			down_hist.append(stats_dic['downs'])
 			other_hist.append(stats_dic['others'])
-			label_hist.append(str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+			label_hist.append(str(now.strftime('%Y-%m-%d %H:%M:%S')))
 			nodepd_hist.append(queueinfo[0])
 			jobspd_hist.append(queueinfo[1])
 			#clean hist to use only 576 elements
@@ -86,13 +87,6 @@ try:
 
 			#Sending email if something unexpected happens
 			e.emailControl(general_dict,stats_dic)
-
-
-
-
-
-
-
 
 
 except KeyboardInterrupt:
